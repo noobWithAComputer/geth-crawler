@@ -55,8 +55,8 @@ func main() {
 
 func readMaps(fname string) {
 	log.Printf("Start reading from file %s", fname)
-	var input = make(map[string]myNode)
 	var thisM = make(map[int]myNode)
+	var thisMi = make(map[string]int)
 	var mc = make(map[string][]string)
 	var nc = make(map[int]string)
 	var nci = make(map[string]int)
@@ -71,26 +71,24 @@ func readMaps(fname string) {
 		log.Printf("Error opening file %s", fname)
 		return
 	}
-	err = json.Unmarshal(raw, &input)
+	err = json.Unmarshal(raw, &thisM)
 	if err != nil {
 		log.Printf("Error unmarshalling file %s", fname)
 		return
 	}
 	
-	j := 0
-	for _, n := range input {
-		thisM[j] = n
-		j++
+	for i, n := range thisM {
+		thisMi[n.Id] = i
 	}
 	
 	for _, n := range thisM {
 		for conn, _ := range n.Connections {
-			if _, ok := input[conn]; ok {
-				if !isStringInSlice(input[conn].Country, mc[n.Country]) {
-					mc[n.Country] = append(mc[n.Country], input[conn].Country)
+			if _, ok := thisMi[conn]; ok {
+				if !isStringInSlice(thisM[thisMi[conn]].Country, mc[n.Country]) {
+					mc[n.Country] = append(mc[n.Country], thisM[thisMi[conn]].Country)
 				}
-				if !isStringInSlice(input[conn].ASO, mas[n.ASO]) {
-					mas[n.ASO] = append(mas[n.ASO], input[conn].ASO)
+				if !isStringInSlice(thisM[thisMi[conn]].ASO, mas[n.ASO]) {
+					mas[n.ASO] = append(mas[n.ASO], thisM[thisMi[conn]].ASO)
 				}
 			}
 		}
@@ -113,7 +111,7 @@ func readMaps(fname string) {
 		}
 	}
 
-	j = 0
+	j := 0
 	for as, _ := range mas {
 		if _, ok := nasi[as]; !ok {
 			nas[j] = as
