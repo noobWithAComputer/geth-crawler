@@ -55,16 +55,13 @@ func main() {
 
 func readMaps(fname string) {
 	log.Printf("Start reading from file %s", fname)
-//	var input = make(map[string]myNode)
 	var thisM = make(map[int]myNode)
-	var thisMi = make(map[string][]int)
 	var nodes1 = make(map[string][]int)
 	var nodesi1 = make(map[int]string)
 	var nodes2 = make(map[string][]int)
 	var nodesi2 = make(map[int]string)
 	var edges1 = make(map[string][]string)
 	var edges2 = make(map[string][]string)
-	var duplicates = make(map[string][]myNode)
 	
 	raw, err := ioutil.ReadFile("./geo/" + fname)
 	if err != nil {
@@ -75,10 +72,6 @@ func readMaps(fname string) {
 	if err != nil {
 		log.Printf("Error unmarshalling file %s", fname)
 		return
-	}
-	
-	for k, n := range thisM {
-		thisMi[n.Id] = append(thisMi[n.Id], k)
 	}
 	
 	i := 0
@@ -107,7 +100,6 @@ func readMaps(fname string) {
 			if _, ok := nodes2[conn]; ok {
 				if !isStringInSlice(conn, edges2[v.Id]) {
 					edges2[v.Id] = append(edges2[v.Id], conn)
-		//			edges2[conn] = append(edges2[conn], v.Id)
 				}
 			}
 		}
@@ -118,31 +110,6 @@ func readMaps(fname string) {
 	
 	writeToFile(nodes1, nodesi1, edges1, newFilename1)
 	writeToFile(nodes2, nodesi2, edges2, newFilename2)
-	
-	for k, v := range thisMi {
-		if len(v) < 2 {
-			continue
-		}
-//		log.Printf("  k=%s, len(v)=%d", k, len(v))
-		var thisArr = []myNode{}
-		for _, j := range v {
-//			log.Printf("    j=%d", j)
-			thisArr = append(thisArr, thisM[j])
-		}
-		duplicates[k] = thisArr
-	}
-	
-	// format json
-	duplicatesJson, err := json.MarshalIndent(duplicates, "", "\t")
-	if err != nil {
-		log.Fatal(err)
-	}
-	
-	// save json file
-	err = ioutil.WriteFile("./nodeInfo/" + fname[:len(fname)-5] + "_duplicates.json", duplicatesJson, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
 	
 	log.Printf("Finished writing to files from original file %s", fname)
 	
