@@ -31,18 +31,20 @@ type node struct {
 }
 
 
-// reads all files from ./geo
-// constructs multiple maps: nodes ([string][]int), nodesi ([int]string), edges ([string][]string) in two forms each: 1 (all nodes) and 2 (only online nodes)
-// puts together adjacency lists for both cases
-// saves the lists to "graphs/s-TIMESTAMP" and "graphs/s-TIMESTAMP_online"
-// can ignore specific countries or AS organizations (see comments in for loop in function readMaps)
+//reads all files from ./geo
+//constructs multiple maps: nodes ([string][]int), nodesi ([int]string), edges ([string][]string) in two forms each: 1 (all nodes) and 2 (only online nodes)
+//puts together adjacency lists for both cases
+//saves the lists to "graphs/s-TIMESTAMP" and "graphs/s-TIMESTAMP_online"
+//can ignore specific countries or AS organizations (see comments in for loop in function readMaps)
 func main() {
+	//get all files from the directory
 	files, err := ioutil.ReadDir("./geo")
 	if err != nil {
 		log.Print("Error reading directory.")
 		return
 	}
 	
+	//iterate over all files
 	for _, file := range files {
 		fname := file.Name()
 		
@@ -55,14 +57,22 @@ func main() {
 
 func readMaps(fname string) {
 	log.Printf("Start reading from file %s", fname)
+	//int->node
 	var thisM = make(map[int]myNode)
+	//nodeID->[]int
 	var nodes1 = make(map[string][]int)
+	//int->nodeID
 	var nodesi1 = make(map[int]string)
+	//nodeID->[]int
 	var nodes2 = make(map[string][]int)
+	//int->nodeID
 	var nodesi2 = make(map[int]string)
+	//nodeID->[]nodeID
 	var edges1 = make(map[string][]string)
+	//nodeID->[]nodeID
 	var edges2 = make(map[string][]string)
 	
+	//read the given file into thisM
 	raw, err := ioutil.ReadFile("./geo/" + fname)
 	if err != nil {
 		log.Printf("Error opening file %s", fname)
@@ -74,12 +84,14 @@ func readMaps(fname string) {
 		return
 	}
 	
+	//iterate over thisM (all nodes)
 	i := 0
 	for _, n := range thisM {
 	//	if n.Country == "United States" || n.ASO == "Amazon.com, Inc." {
 	//		continue
 	//	}
 	// remove the above comment to filter nodes from specific countries and/or AS organizations out
+		//add the current node to the maps (int->node and nodeID->int)
 		nodes1[n.Id] = append(nodes1[n.Id], i)
 		nodesi1[i] = n.Id
 		nodes2[n.Id] = append(nodes2[n.Id], i)
@@ -88,17 +100,25 @@ func readMaps(fname string) {
 		i++
 	}
 	
+	//iterate over thisM (all nodes)
 	for _, v := range thisM {
+		//iterate over the connections of the current node
 		for conn, _ := range v.Connections {
+			//if this connected node is not yet in the node map for online nodes
 			if _, ok := nodes1[conn]; !ok {
+				//add it to both maps (int->node and nodeID->int)
 				nodes1[conn] = append(nodes1[conn], i)
 				nodesi1[i] = conn
 				i++
 			}
 			
+			//add this connection to the current node
 			edges1[v.Id] = append(edges1[v.Id], conn)
+			//if also the connected node is in the nodes map for all nodes
 			if _, ok := nodes2[conn]; ok {
+				//if it was not yet added as connection for the current node
 				if !isStringInSlice(conn, edges2[v.Id]) {
+					//add it
 					edges2[v.Id] = append(edges2[v.Id], conn)
 				}
 			}
@@ -124,6 +144,7 @@ func writeToFile(nodes map[string][]int, nodesi map[int]string, edges map[string
 		return
 	}
 	
+	//get the node and edge count of the graph
 	ecount := 0
 	ncount := len(nodes)
 	for _, v := range edges {
@@ -131,24 +152,28 @@ func writeToFile(nodes map[string][]int, nodesi map[int]string, edges map[string
 	}
 	log.Printf("  Edges: %d", ecount)
 	
+	//write the header of the file
 	f.Write([]byte("test\n"))
 	f.Write([]byte(strconv.Itoa(ncount) + "\n"))
 	f.Write([]byte(strconv.Itoa(ecount) + "\n"))
 	f.Write([]byte("\n"))
 	
-//	log.Printf("  Starting first iteration")
 	
+	//iterate over all nodes
 	for i := 0; i < len(nodes); i++ {
+		//write its int ID
 		f.Write([]byte(strconv.Itoa(i) + ":"))
 		
-//		log.Printf("    Starting second iteration, len=%d, i=%d", len(nodes), i)
+		//iterate over all edges of the current node
 		for j, id := range edges[nodesi[i]] {
+			//write the int ID of the connected node
 			f.Write([]byte(strconv.Itoa(nodes[id][0])))
 			
+			//if this was the last connection
 			if j == (len(edges[nodesi[i]]) - 1) {
-//				log.Printf("      Exiting loop, j=%d", j)
 				break
 			}
+			//otherwise write ";" for more connections
 			f.Write([]byte(";"))
 		}
 		

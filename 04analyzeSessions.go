@@ -25,65 +25,85 @@ type Reachability struct {
 }
 
 
-// reads all files from ./snapshots/ and analyzes them
-// iterates over the files and extracts when and how often a node was reachable
-// creates a struct Reachability for each node id containing the reachability (map), count of online/offline times and calculates the session and intersession lengths
-// saves the map containing the structs to analyzedNodes.json
+//reads all files from ./snapshots/ and analyzes them
+//iterates over the files and extracts when and how often a node was reachable
+//creates a struct Reachability for each node id containing the reachability (map), count of online/offline times and calculates the session and intersession lengths
+//saves the map containing the structs to analyzedNodes.json
 func main() {
-//	var m = make(map[string]myNode)
+	//global nodes map, nodeID->node
 	var nodes = make(map[string]myNode)
+	//nodeID->Reachability
 	var a = make(map[string]Reachability)
+	
+	//get all files from the directory
 	files, err := ioutil.ReadDir("./snapshots")
 	if err != nil {
-		log.Print("err")
+		log.Fatal(err)
 		return
 	}
 	
+	//iterate over all files
 	for _, file := range files {
 		fname := file.Name()
 		log.Print("fileName: ", fname)
+		//int->node
 		var thisM = make(map[int]myNode)
+		//nodeID->int
 		var thisMi = make(map[string]int)
 
+		//read the given file into thisM
 		raw, err := ioutil.ReadFile("./snapshots/" + fname)
 		if err != nil {
-			log.Print("err1")
+			log.Fatal(err)
 			return
 		}
 		err = json.Unmarshal(raw, &thisM)
 		if err != nil {
-			log.Print("err2")
-			return
-		}
-		timestamp, err := time.Parse("2006-01-02--15-04-05", fname[2:len(fname)-5])
-		if err != nil {
-			log.Print("err3")
+			log.Fatal(err)
 			return
 		}
 		
+		timestamp, err := time.Parse("2006-01-02--15-04-05", fname[2:len(fname)-5])
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+		
+		//iterate over thisM (all nodes)
 		for k, v := range thisM {
+			//add this node to global nodes map
 			nodes[v.Id] = v
+			//contruct nodeID->int map
 			thisMi[v.Id] = k
 		}
 		
+		//iterate over all nodes found yet
 		for _, v := range nodes {
 			var thisReach = new(Reachability)
 			thisReach.Reachable = make(map[time.Time]string)
+			//if this node was already seen
 			if _, ok := a[v.Id]; ok {
+				//get its Reachability
 				*thisReach = a[v.Id]
 			}
+			//if this node is in the latest nodes map
 			if _, ok := thisMi[v.Id]; ok {
+				//it was reachable
 				thisReach.Reachable[timestamp] = "true"
+				//increase counter
 				thisReach.Count[0]++
 			} else {
+				//it was not reachable
 				thisReach.Reachable[timestamp] = "false"
+				//increase counter
 				thisReach.Count[1]++
 			}
-			
+			//write Reachability to map
 			a[v.Id] = *thisReach
 		}
 	}
 
+	//iterate over all Reachabilities
 	for k, v := range a {
 		thisSession := 0
 		sessionCount := 0
@@ -95,13 +115,16 @@ func main() {
 
 		lastEntry := "false"
 		
+		//iterate over all files
 		for _, file := range files {
 			timestamp, err := time.Parse("2006-01-02--15-04-05", file.Name()[2:len(file.Name())-5])
 			if err != nil {
-				log.Print("err3")
+				log.Fatal(err)
 				return
 			}
+			//if the timestamp is not in the map for this node
 			if _, ok := v.Reachable[timestamp]; !ok {
+				//count it as intersession
 				if thisInterSession == 0 {
 					interSessionCount++
 				}
@@ -141,18 +164,18 @@ func main() {
 		sessionLength = 0.0
 		interSessionLength = 0.0
 
+		//compute session lengths
 		if sessionCount > 0 {
 			for _, i := range sessions {
 				sessionLength += float32(i)
 			}
-			log.Printf("sessionCount=%d, sessionLength=%f", sessionCount, sessionLength)
 			sessionLength /= float32(sessionCount)
 		}
+		//compute intersession lengths
 		if interSessionCount > 0 {
 			for _, j := range interSessions {
 				interSessionLength += float32(j)
 			}
-			log.Printf("interSessionCount= %d, interSessionLength=%f", interSessionCount, interSessionLength)
 			interSessionLength /= float32(interSessionCount)
 		}
 		
@@ -168,12 +191,12 @@ func main() {
 
 	ajson, err := json.MarshalIndent(a, "", "\t")
 	if err != nil {
-		log.Print("err3")
+		log.Fatal(err)
 		return
 	}
 	err = ioutil.WriteFile("./nodeInfo/sessionInfo.json", ajson, 0644)
 	if err != nil {
-		log.Print("err4")
+		log.Fatal(err)
 		return
 	}
 

@@ -34,36 +34,44 @@ type Record struct {
 	Connections map[string]bool `json:"connections"`
 }
 
+type C struct {
+	IDs int `json:"ids"`
+	IPs int `json:"ips"`
+}
+
 type Counts struct {
-	Countries map[string]int `json:"countries"`
+	Countries map[string]C `json:"countries"`
 	AS        map[string]int `json:"as"`
 }
 
 
 
-// reads all files from ./snapshots and the GeoLite databases
-// iterates over all snapshots and collects geolocational data for each node
-// saves a map of the nodes with geo data to ./graphs/s-TIMESTAMP_geo.json
-// saves statistics about the distribution of countries and AS to ./graphs/s-TIMESTAMP_geo_counts.json
+//reads all files from ./snapshots and the GeoLite databases
+//iterates over all snapshots and collects geolocational data for each node
+//saves a map of the nodes with geo data to ./graphs/s-TIMESTAMP_geo.json
+//saves statistics about the distribution of countries and AS to ./graphs/s-TIMESTAMP_geo_counts.json
 func main() {
+	//get all files from the directory
 	files, err := ioutil.ReadDir("./snapshots")
 	if err != nil {
-		log.Print("Error reading directory.")
+		log.Fatal(err)
 		return
 	}
 	
+	//load the DBs
 	cityDB, err := geoip2.Open("./GeoLite/GeoLite2-City.mmdb")
 	if err != nil {
-		log.Print("Error loading city db")
+		log.Fatal(err)
 		return
 	}
 	
 	asnDB, err := geoip2.Open("./GeoLite/GeoLite2-ASN.mmdb")
 	if err != nil {
-		log.Print("Error loading ASN db")
+		log.Fatal(err)
 		return
 	}
 	
+	//iterate over all files
 	for _, file := range files {
 		fname := file.Name()
 		
@@ -82,9 +90,10 @@ func readMaps(fname string, asnDB *geoip2.Reader, cityDB *geoip2.Reader) {
 	var rmap = make(map[int]Record)
 	var counts = new(Counts)
 
-	counts.Countries = make(map[string]int)
+	counts.Countries = make(map[string]C)
 	counts.AS = make(map[string]int)
 	
+	//read the given file into thisM
 	raw, err := ioutil.ReadFile("./snapshots/" + fname)
 	if err != nil {
 		log.Printf("Error opening file %s", fname)
@@ -96,9 +105,11 @@ func readMaps(fname string, asnDB *geoip2.Reader, cityDB *geoip2.Reader) {
 		return
 	}
 	
+	//iterate over thisM (all nodes)
 	for k, v := range thisM {
 		ip := net.ParseIP(v.Ip)
 		
+		//get information from DBs
 		asn, err := asnDB.ASN(ip)
 		if err != nil {
 			log.Fatal(err)
@@ -130,10 +141,32 @@ func readMaps(fname string, asnDB *geoip2.Reader, cityDB *geoip2.Reader) {
 			Connections: v.Connections,
 		}
 		
-		counts.Countries[country]++
+		//increase the count for this AS
 		counts.AS[as]++
 		
 		rmap[k] = *record
+	}
+	
+	//iterate over all nodes (with information -> rmap)
+	//populate maps(countryname->[]ID/[]IP) with IDs/IPs, if they are not yet within these arrays
+	var cIDs = make(map[string][]string)
+	var cIPs = make(map[string][]string)
+	for _, v := range rmap {
+		if !isStringInSlice(v.Id, cIDs[v.Country]) {
+			cIDs[v.Country] = append(cIDs[v.Country], v.Id)
+		}
+		if !isStringInSlice(v.Ip, cIPs[v.Country]) {
+			cIPs[v.Country] = append(cIPs[v.Country], v.Ip)
+		}
+	}
+	
+	//iterate over the array to get the count of different IDs/IPs per country
+	var thisC = new(C)
+	for c, a := range cIDs {
+		thisC.IDs = len(a)
+		thisC.IPs = len(cIPs[c])
+//		log.Printf("  Country: %s, IDs: %d, IPs: %d", c, len(a), len(cIPs[c]))
+		counts.Countries[c] = *thisC
 	}
 	
 	// format json
@@ -163,7 +196,14 @@ func readMaps(fname string, asnDB *geoip2.Reader, cityDB *geoip2.Reader) {
 }
 
 
-
+func isStringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
 
 
 
