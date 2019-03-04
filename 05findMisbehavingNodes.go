@@ -29,7 +29,7 @@ type eclipse struct {
 }
 
 type sybil1 struct {
-	Count int            `json:"count"`
+	Count int             `json:"count"`
 	IP    map[int]*sybil2 `json:"ip"`
 }
 
@@ -47,25 +47,27 @@ type node struct {
 }
 
 
-// reads all files from ./snapshots/ and analyzes them
-// iterates over the files and looks for sybils and eclipse nodes
-// creates a map over the IDs (eclipse) and the IPs (sybils) and collects the nodes falling into this subspace
-// saves the map containing the structs to analyzedNodes.json
+//reads all files from ./snapshots/ and analyzes them
+//iterates over the files and looks for sybils and eclipse nodes
+//creates a map over the IDs (eclipse) and the IPs (sybils) and collects the nodes falling into this subspace
+//saves the maps containing the structs to s-TIMESTAMP_eclipse.json and s-TIMESTAMP_sybils.json
 func main() {
+	//get all files from the directory
 	files, err := ioutil.ReadDir("./snapshots")
 	if err != nil {
 		log.Print("err")
 		return
 	}
 	
+	//iterate over all files
 	for _, file := range files {
 		fname := file.Name()
 		log.Print("fileName: ", fname)
 		var thisM = make(map[int]myNode)
 		var eclipses = make(map[string]*eclipse)
 		var sybils = make(map[string]*sybil1)
-//		var ecounts = make(map[string]int)
 
+		//read the given file into thisM
 		raw, err := ioutil.ReadFile("./geo/" + fname)
 		if err != nil {
 			log.Fatal(err)
@@ -75,6 +77,7 @@ func main() {
 			log.Fatal(err)
 		}
 		
+		//iterate over thisM (all nodes)
 		for _, v := range thisM {
 			thisNode := new(node)
 			*thisNode = node {
@@ -85,9 +88,12 @@ func main() {
 				City: v.City,
 			}
 			
+			//get the beginning of the nodeID
 			bId := v.Id[:4]
+			//and the rest
 			rId := v.Id[4:]
 			
+			//if the ID prefix of this node is not in the eclipse map, initialize it
 			if _, ok := eclipses[bId]; !ok {
 				eclipses[bId] = new(eclipse)
 			}
@@ -95,15 +101,17 @@ func main() {
 				eclipses[bId].Nodes = make(map[string][]node)
 			}
 			
+			//add the eclipse
 			eclipses[bId].Nodes[rId] = append(eclipses[bId].Nodes[rId], *thisNode)
 			eclipses[bId].Count++
-//			ecounts[bId]++
 			
+			//get the parts of the IP
 			ip := strings.Split(v.Ip, ".")
 			thisIP := ip[0] + "." + ip[1]
 			midIP, _ := strconv.Atoi(ip[2])
 			lastIP, _ := strconv.Atoi(ip[3])
 			
+			//if the IP prefix is not in the sybils map, initialize it
 			if _, ok := sybils[thisIP]; !ok {
 				sybils[thisIP] = new(sybil1)
 			}
@@ -117,26 +125,33 @@ func main() {
 				sybils[thisIP].IP[midIP].Nodes = make(map[int][]node)				
 			}
 			
+			//add the sybil
 			sybils[thisIP].IP[midIP].Nodes[lastIP] = append(sybils[thisIP].IP[midIP].Nodes[lastIP], *thisNode)
 		}
 		
+		//iterate over all eclipses
 		for k, v := range eclipses {
+			//if there is only one entry for this ID prefix, delete it
 			if v.Count < 2 {
 				delete(eclipses, k)
 			}
 		}
 		
+		//iterate over all sybils
 		for k1, v1 := range sybils {
 			for k2, v2 := range v1.IP {
+				// if there is only one entry for this lastIP, delete it
 				if len(v2.Nodes) < 2 {
 					delete(sybils[k1].IP, k2)
 				}
 			}
+			//if there is only one entry for this midIP, delete it
 			if len(v1.IP) < 2 {
 				delete(sybils, k1)
 			}
 		}
 
+		//count the sybills per level
 		for _, v1 := range sybils {
 			for _, v2 := range v1.IP {
 				for _, n := range v2.Nodes {
@@ -146,14 +161,6 @@ func main() {
 			}
 		}
 		
-//		ecJson, err := json.MarshalIndent(ecounts, "", "\t")
-//		if err != nil {
-//			log.Fatal(err)
-//		}
-//		err = ioutil.WriteFile("./nodeInfo/" + fname[:len(fname)-5] + "_ec.json", ecJson, 0644)
-//		if err != nil {
-//			log.Fatal(err)
-//		}
 
 		eclipseJson, err := json.MarshalIndent(eclipses, "", "\t")
 		if err != nil {
