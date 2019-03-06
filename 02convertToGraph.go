@@ -60,12 +60,10 @@ func readMaps(fname string) {
 	//int->node
 	var thisM = make(map[int]myNode)
 	//nodeID->[]int
-//	var nodes1 = make(map[string][]int)
 	var nodes1 = make(map[string]int)
 	//int->nodeID
 	var nodesi1 = make(map[int]string)
 	//nodeID->[]int
-//	var nodes2 = make(map[string][]int)
 	var nodes2 = make(map[string]int)
 	//int->nodeID
 	var nodesi2 = make(map[int]string)
@@ -86,22 +84,26 @@ func readMaps(fname string) {
 		return
 	}
 	
-	//iterate over thisM (all nodes)
+	//node counter all nodes
 	i := 0
+	//node counter online nodes
 	j := 0
+	//iterate over thisM (all nodes)
 	for _, n := range thisM {
 	//	if n.Country == "United States" || n.ASO == "Amazon.com, Inc." {
 	//		continue
 	//	}
-	// remove the above comment to filter nodes from specific countries and/or AS organizations out
-		//add the current node to the maps (int->nodeID and nodeID->int)
-	//	nodes1[n.Id] = append(nodes1[n.Id], i)
+	//remove the above comment to filter nodes from specific countries and/or AS organizations out
+		//if the node ID is not yet present in nodes1
 		if _, ok := nodes1[n.Id]; !ok {
+		//add the current it to both maps (int->nodeID and nodeID->int)
 			nodes1[n.Id] = i
 			nodesi1[i] = n.Id
 			i++
 		}
+		//if the node ID is not yet present in nodes2
 		if _, ok := nodes2[n.Id]; !ok {
+			//add the current it to both maps (int->nodeID and nodeID->int)
 			nodes2[n.Id] = j
 			nodesi2[j] = n.Id
 			j++
@@ -142,9 +144,6 @@ func readMaps(fname string) {
 	newFilename1 := "graphs/" + fname[:len(fname)-5] + ""
 	newFilename2 := "graphs_online/" + fname[:len(fname)-5] + "_online"
 	
-	log.Printf("     len(nodes1) = %d,    len(nodesi1) = %d", len(nodes1), len(nodesi1))
-	log.Printf("     len(nodes2) = %d,    len(nodesi2) = %d", len(nodes2), len(nodesi2))
-	
 	writeToFile(nodes1, nodesi1, edges1, newFilename1)
 	writeToFile(nodes2, nodesi2, edges2, newFilename2)
 	
@@ -167,7 +166,6 @@ func writeToFile(nodes map[string]int, nodesi map[int]string, edges map[string][
 	for _, v := range edges {
 		ecount += len(v)
 	}
-	log.Printf("  Edges: %d", ecount)
 	
 	//write the header of the file
 	f.Write([]byte("test\n"))
