@@ -60,11 +60,13 @@ func readMaps(fname string) {
 	//int->node
 	var thisM = make(map[int]myNode)
 	//nodeID->[]int
-	var nodes1 = make(map[string][]int)
+//	var nodes1 = make(map[string][]int)
+	var nodes1 = make(map[string]int)
 	//int->nodeID
 	var nodesi1 = make(map[int]string)
 	//nodeID->[]int
-	var nodes2 = make(map[string][]int)
+//	var nodes2 = make(map[string][]int)
+	var nodes2 = make(map[string]int)
 	//int->nodeID
 	var nodesi2 = make(map[int]string)
 	//nodeID->[]nodeID
@@ -86,18 +88,24 @@ func readMaps(fname string) {
 	
 	//iterate over thisM (all nodes)
 	i := 0
+	j := 0
 	for _, n := range thisM {
 	//	if n.Country == "United States" || n.ASO == "Amazon.com, Inc." {
 	//		continue
 	//	}
 	// remove the above comment to filter nodes from specific countries and/or AS organizations out
-		//add the current node to the maps (int->node and nodeID->int)
-		nodes1[n.Id] = append(nodes1[n.Id], i)
-		nodesi1[i] = n.Id
-		nodes2[n.Id] = append(nodes2[n.Id], i)
-		nodesi2[i] = n.Id
-		
-		i++
+		//add the current node to the maps (int->nodeID and nodeID->int)
+	//	nodes1[n.Id] = append(nodes1[n.Id], i)
+		if _, ok := nodes1[n.Id]; !ok {
+			nodes1[n.Id] = i
+			nodesi1[i] = n.Id
+			i++
+		}
+		if _, ok := nodes2[n.Id]; !ok {
+			nodes2[n.Id] = j
+			nodesi2[j] = n.Id
+			j++
+		}
 	}
 	
 	//iterate over thisM (all nodes)
@@ -107,11 +115,17 @@ func readMaps(fname string) {
 			//if this connected node is not yet in the node map for online nodes
 			if _, ok := nodes1[conn]; !ok {
 				//add it to both maps (int->node and nodeID->int)
-				nodes1[conn] = append(nodes1[conn], i)
+				nodes1[conn] = i
 				nodesi1[i] = conn
 				i++
 			}
-			
+		}
+	}
+	
+	//iterate over thisM (all nodes)
+	for _, v := range thisM {
+		//iterate over the connections of the current node
+		for conn, _ := range v.Connections {
 			//add this connection to the current node
 			edges1[v.Id] = append(edges1[v.Id], conn)
 			//if also the connected node is in the nodes map for all nodes
@@ -128,6 +142,9 @@ func readMaps(fname string) {
 	newFilename1 := "graphs/" + fname[:len(fname)-5] + ""
 	newFilename2 := "graphs_online/" + fname[:len(fname)-5] + "_online"
 	
+	log.Printf("     len(nodes1) = %d,    len(nodesi1) = %d", len(nodes1), len(nodesi1))
+	log.Printf("     len(nodes2) = %d,    len(nodesi2) = %d", len(nodes2), len(nodesi2))
+	
 	writeToFile(nodes1, nodesi1, edges1, newFilename1)
 	writeToFile(nodes2, nodesi2, edges2, newFilename2)
 	
@@ -136,7 +153,7 @@ func readMaps(fname string) {
 }
 
 
-func writeToFile(nodes map[string][]int, nodesi map[int]string, edges map[string][]string, fname string) {
+func writeToFile(nodes map[string]int, nodesi map[int]string, edges map[string][]string, fname string) {
 	log.Printf("Start writing to file %s", fname)
 	f, err := os.Create("./" + fname)
 	if err != nil {
@@ -167,7 +184,7 @@ func writeToFile(nodes map[string][]int, nodesi map[int]string, edges map[string
 		//iterate over all edges of the current node
 		for j, id := range edges[nodesi[i]] {
 			//write the int ID of the connected node
-			f.Write([]byte(strconv.Itoa(nodes[id][0])))
+			f.Write([]byte(strconv.Itoa(nodes[id])))
 			
 			//if this was the last connection
 			if j == (len(edges[nodesi[i]]) - 1) {
