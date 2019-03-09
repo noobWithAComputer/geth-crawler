@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 //	"sync"
@@ -37,8 +36,12 @@ type stats struct {
 type Statistic struct {
 	Avg_nodes               float32             `json:"avg_nodes"`
 	Avg_edges               float32             `json:"avg_edges"`
+	Min_resilience_targeted float32             `json:"min_resilience_targeted"`
 	Avg_resilience_targeted float32             `json:"avg_resilience_targeted"`
+	Max_resilience_targeted float32             `json:"max_resilience_targeted"`
+	Min_resilience_random   float32             `json:"min_resilience_random"`
 	Avg_resilience_random   float32             `json:"avg_resilience_random"`
+	Max_resilience_random   float32             `json:"max_resilience_random"`
 	Avg_degree_min          float32             `json:"avg_degree_min"`
 	Avg_degree_med          float32             `json:"avg_degree_med"`
 	Avg_degree_avg          float32             `json:"avg_degree_avg"`
@@ -54,27 +57,54 @@ type Statistic struct {
 	Stats                   map[time.Time]stats `json:"stats"`
 }
 
-//reads all files from ./geo
-//constructs multiple maps: nodes ([string][]int), nodesi ([int]string), edges ([string][]string) in two forms each: 1 (all nodes) and 2 (only online nodes)
-//puts together adjacency lists for both cases
-//saves the lists to "graphs/s-TIMESTAMP" and "graphs/s-TIMESTAMP_online"
-//can ignore specific countries or AS organizations (see comments in for loop in function readMaps)
+//reads the necessary files from ./data
+//iterates over all analysis results from GTNA 
+//reads statistics for degree and resilience of each snapshot and calculates averages over all snapshots
+//saves the statistics to ./nodeInfo/statisticsA.json and ./nodeInfo/statisticsO.json for AS graphs and online graphs respectively
 func main() {
+//	var allStatsA = new(Statistic)
+//	var allStatsO = new(Statistic)
+	var statisticsA = make(map[time.Time]stats)
+	var statisticsO = make(map[time.Time]stats)
+	
+	allStatsO := calculate("online", statisticsO)
+	allStatsA := calculate("asorgs", statisticsA)
+	
+	ajson, err := json.MarshalIndent(allStatsA, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./nodeInfo/statisticsA.json", ajson, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	ojson, err := json.MarshalIndent(allStatsO, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./nodeInfo/statisticsO.json", ojson, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+
+func calculate(ftype string, statistics map[time.Time]stats) (Statistic) {
 	var allStats = new(Statistic)
-	var statistics = make(map[time.Time]stats)
 	
 	//get all files from the directory
 	files, err := ioutil.ReadDir("./data")
 	if err != nil {
-		log.Print("Error reading directory.")
-		return
+		log.Fatal(err)
 	}
 	
 	//iterate over all files
 	for _, file := range files {
 		fname := file.Name()
 		
-		if strings.Contains(fname, "online") || strings.Contains(fname, "asorgs") {
+		//if they 
+		if strings.Contains(fname, ftype) {
 			readStats(fname, statistics)
 		}
 	}
@@ -96,6 +126,7 @@ func main() {
 	sum_out_degree_avg := float32(0)
 	sum_out_degree_max := 0
 	
+	//sum all stats up
 	for _, s := range statistics {
 		sum_nodes += s.Nodes
 		sum_edges += s.Edges
@@ -117,11 +148,36 @@ func main() {
 	
 	divisor := float32(len(statistics))
 	
+	min_resilience_targeted := float32(1)
+	max_resilience_targeted := float32(0)
+	min_resilience_random := float32(1)
+	max_resilience_random := float32(0)
+	
+	for _, s := range statistics {
+		if s.Resilience_targeted < min_resilience_targeted {
+			min_resilience_targeted = s.Resilience_targeted
+		}
+		if s.Resilience_targeted > max_resilience_targeted {
+			max_resilience_targeted = s.Resilience_targeted
+		}
+		if s.Resilience_random < min_resilience_random {
+			min_resilience_random = s.Resilience_random
+		}
+		if s.Resilience_random > max_resilience_random {
+			max_resilience_random = s.Resilience_random
+		}
+	}
+	
+	//calculate average
 	*allStats = Statistic {
 		Avg_nodes: float32(float32(sum_nodes)/divisor),
 		Avg_edges: float32(float32(sum_edges)/divisor),
+		Min_resilience_targeted: min_resilience_targeted,
 		Avg_resilience_targeted: float32(sum_resilience_targeted/divisor),
+		Max_resilience_targeted: max_resilience_targeted,
+		Min_resilience_random: min_resilience_random,
 		Avg_resilience_random: float32(sum_resilience_random/divisor),
+		Max_resilience_random: max_resilience_random,
 		Avg_degree_min: float32(float32(sum_degree_min)/divisor),
 		Avg_degree_med: float32(float32(sum_degree_med)/divisor),
 		Avg_degree_avg: float32(sum_degree_avg/divisor),
@@ -137,16 +193,9 @@ func main() {
 		Stats: statistics,
 	}
 	
-	sjson, err := json.MarshalIndent(allStats, "", "\t")
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = ioutil.WriteFile("./nodeInfo/statistics.json", sjson, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
-	
 	log.Printf("Ende, len: %d", len(files))
+	
+	return *allStats
 }
 
 
@@ -161,10 +210,6 @@ func readStats(fname string, statistics map[time.Time]stats) {
 	content := string(raw)
 	contents := strings.Split(content, "\t")
 	
-//	for i, t := range contents {
-//		log.Printf("  %d: %s", i, t)
-//	}
-	
 	nodes, _ := strconv.ParseFloat(contents[1], 32)
 	edges, _ := strconv.ParseFloat(contents[9], 32)
 	degree_min, _ := strconv.ParseFloat(contents[17], 32)
@@ -178,7 +223,7 @@ func readStats(fname string, statistics map[time.Time]stats) {
 	out_degree_min, _ := strconv.ParseFloat(contents[81], 32)
 	out_degree_med, _ := strconv.ParseFloat(contents[89], 32)
 	out_degree_avg, _ := strconv.ParseFloat(contents[97], 32)
-	out_degree_max, _ := strconv.ParseFloat(contents[15], 32)
+	out_degree_max, _ := strconv.ParseFloat(contents[105], 32)
 	
 	raw, err = ioutil.ReadFile("./data/" + fname + "/CRITICAL_POINTS-true-LARGEST/_singles.txt")
 	if err != nil {
@@ -238,69 +283,6 @@ func readStats(fname string, statistics map[time.Time]stats) {
 	log.Printf("Finished reading stats from directory %s", fname)
 	
 }
-
-
-func writeToFile(nodes map[string]int, nodesi map[int]string, edges map[string][]string, fname string) {
-	log.Printf("Start writing to file %s", fname)
-	f, err := os.Create("./" + fname)
-	if err != nil {
-		log.Printf("Error creating file %s", fname)
-		return
-	}
-	
-	//get the node and edge count of the graph
-	ecount := 0
-	ncount := len(nodes)
-	for _, v := range edges {
-		ecount += len(v)
-	}
-	
-	//write the header of the file
-	f.Write([]byte("test\n"))
-	f.Write([]byte(strconv.Itoa(ncount) + "\n"))
-	f.Write([]byte(strconv.Itoa(ecount) + "\n"))
-	f.Write([]byte("\n"))
-	
-	
-	//iterate over all nodes
-	for i := 0; i < len(nodes); i++ {
-		//write its int ID
-		f.Write([]byte(strconv.Itoa(i) + ":"))
-		
-		//iterate over all edges of the current node
-		for j, id := range edges[nodesi[i]] {
-			//write the int ID of the connected node
-			f.Write([]byte(strconv.Itoa(nodes[id])))
-			
-			//if this was the last connection
-			if j == (len(edges[nodesi[i]]) - 1) {
-				break
-			}
-			//otherwise write ";" for more connections
-			f.Write([]byte(";"))
-		}
-		
-		f.Write([]byte("\n"))
-	}
-	
-	err = f.Close()
-	if err != nil {
-		log.Printf("Error closing file %s", fname)
-		return
-	}
-}
-
-
-func isStringInSlice(a string, list []string) bool {
-    for _, b := range list {
-        if b == a {
-            return true
-        }
-    }
-    return false
-}
-
-
 
 
 
