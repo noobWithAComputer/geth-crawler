@@ -7,13 +7,15 @@ import (
 	"time"
 )
 
-//type ID [32]byte
-
 type myNode struct {
 	Id          string          `json:"id"`
 	Ip          string          `json:"ip"`
 	Port        int             `json:"port"`
 	Reachable   bool            `json:"reachable"`
+	Country     string          `json:"country"`
+	Sub         string          `json:"subdivision"`
+	City        string          `json:"city"`
+	ASO         string          `json:"aso"`
 	Connections map[string]bool `json:"connections"`
 }
 
@@ -26,11 +28,21 @@ type Reachability struct {
 	Reachable     map[time.Time]string `json:"reachable"`
 }
 
+type stats struct {
+	Nodes         int                  `json:"nodes"`
+	Sessions      float32              `json:"sessionlength"`
+	InterSessions float32              `json:"intersessionlength"`
+	SCount        float32              `json:"sessioncount"`
+	ISCount       float32              `json:"intersessioncount"`
+}
 
-//reads all files from ./snapshots/ and analyzes them
+
+//reads all files from ./geo/ and analyzes them
 //iterates over the files and extracts when and how often a node was reachable
 //creates a struct Reachability for each node id containing the reachability (map), count of online/offline times and calculates the session and intersession lengths
-//saves the map containing the structs to analyzedNodes.json
+//saves the map containing the structs to ./nodeInfo/sessionInfo.json
+//calculates averages for all countries
+//saves the country stats in ./nodeInfo/sessionInfoCountries.json
 func main() {
 	//global nodes map, nodeID->node
 	var nodes = make(map[string]myNode)
@@ -38,7 +50,7 @@ func main() {
 	var a = make(map[string]Reachability)
 	
 	//get all files from the directory
-	files, err := ioutil.ReadDir("./snapshots")
+	files, err := ioutil.ReadDir("./geo")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,7 +65,7 @@ func main() {
 		var thisMi = make(map[string]int)
 
 		//read the given file into thisM
-		raw, err := ioutil.ReadFile("./snapshots/" + fname)
+		raw, err := ioutil.ReadFile("./geo/" + fname)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -136,6 +148,8 @@ func main() {
 		
 		a[k] = *thisReach
 	}
+	
+	log.Print("Calculating session lengths."
 
 	//iterate over all Reachabilities
 	for k, v := range a {
@@ -234,6 +248,70 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	
+	log.Print("Calculating averages.")
+	
+	countryStats := make(map[string]stats)
+	
+	for id, reach := range a {
+		country := nodes[id].Country
+		theseStats := new(stats)		
+		nodes := 1
+		sessions := reach.Sessions
+		interSessions := reach.InterSessions
+		sCount := float32(reach.SCount)
+		iSCount := float32(reach.ISCount)
+		
+		if _, ok := countryStats[country]; ok {
+			*theseStats = countryStats[country]
+			nodes = theseStats.Nodes + 1
+			sessions = theseStats.Sessions + reach.Sessions
+			interSessions = theseStats.InterSessions + reach.InterSessions
+			sCount = theseStats.SCount + float32(reach.SCount)
+			iSCount = theseStats.ISCount + float32(reach.ISCount)
+		}
+		
+		*theseStats = stats {
+			Nodes: nodes,
+			Sessions: sessions,
+			InterSessions: interSessions,
+			SCount: sCount,
+			ISCount: iSCount,
+		}
+		
+		countryStats[country] = *theseStats
+	}
+	
+	for c, s := range countryStats {
+		theseStats := new(stats)
+		*theseStats = s
+		
+		nodes := theseStats.Nodes
+		sessions := float32(theseStats.Sessions / float32(theseStats.Nodes))
+		interSessions := float32(theseStats.InterSessions / float32(theseStats.Nodes))
+		sCount := float32(theseStats.SCount / float32(theseStats.Nodes))
+		iSCount := float32(theseStats.ISCount / float32(theseStats.Nodes))
+		
+		*theseStats = stats {
+			Nodes: nodes,
+			Sessions: sessions,
+			InterSessions: interSessions,
+			SCount: sCount,
+			ISCount: iSCount,
+		}
+		
+		countryStats[c] = *theseStats
+	}
+	
+	cjson, err := json.MarshalIndent(countryStats, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./nodeInfo/sessionInfoCountries.json", cjson, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	log.Printf("Ende, len: %d", len(a))
 }
+
