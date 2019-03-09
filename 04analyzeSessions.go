@@ -19,7 +19,9 @@ type myNode struct {
 
 type Reachability struct {
 	Sessions      float32              `json:"sessionlength"`
-	InterSessions float32              `json:"intersession"`
+	InterSessions float32              `json:"intersessionlength"`
+	SCount        int                  `json:"sessioncount"`
+	ISCount       int                  `json:"intersessioncount"`
 	Count         [2]int               `json:"count"`
 	Reachable     map[time.Time]string `json:"reachable"`
 }
@@ -39,13 +41,12 @@ func main() {
 	files, err := ioutil.ReadDir("./snapshots")
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	
 	//iterate over all files
 	for _, file := range files {
 		fname := file.Name()
-		log.Print("fileName: ", fname)
+		log.Print("Reading file: ", fname)
 		//int->node
 		var thisM = make(map[int]myNode)
 		//nodeID->int
@@ -55,18 +56,15 @@ func main() {
 		raw, err := ioutil.ReadFile("./snapshots/" + fname)
 		if err != nil {
 			log.Fatal(err)
-			return
 		}
 		err = json.Unmarshal(raw, &thisM)
 		if err != nil {
 			log.Fatal(err)
-			return
 		}
 		
 		timestamp, err := time.Parse("2006-01-02--15-04-05", fname[2:len(fname)-5])
 		if err != nil {
 			log.Fatal(err)
-			return
 		}
 		
 		//iterate over thisM (all nodes)
@@ -90,17 +88,53 @@ func main() {
 			if _, ok := thisMi[v.Id]; ok {
 				//it was reachable
 				thisReach.Reachable[timestamp] = "true"
-				//increase counter
-				thisReach.Count[0]++
 			} else {
 				//it was not reachable
 				thisReach.Reachable[timestamp] = "false"
-				//increase counter
-				thisReach.Count[1]++
 			}
 			//write Reachability to map
 			a[v.Id] = *thisReach
 		}
+	}
+	
+	//iterate over all Reachabilities
+	for k, v := range a {
+		
+		var thisReach = new(Reachability)
+		*thisReach = v
+		count := [2]int{0, 0}
+		
+		//for all time entries
+		for _, file := range files {
+			timestamp, err := time.Parse("2006-01-02--15-04-05", file.Name()[2:len(file.Name())-5])
+			if err != nil {
+				log.Fatal(err)
+			}
+			
+			//if the entry does not exist
+			if _, ok := thisReach.Reachable[timestamp]; !ok {
+				//add it as offline
+				thisReach.Reachable[timestamp] = "false"
+			}
+			if thisReach.Reachable[timestamp] == "true" {
+				//increase counter
+				count[0]++
+			} else {
+				//increase counter
+				count[1]++
+			}
+		}
+		
+		*thisReach = Reachability {
+			Sessions: float32(0),
+			InterSessions: float32(0),
+			SCount: 0,
+			ISCount: 0,
+			Count: count,
+			Reachable: thisReach.Reachable,
+		}
+		
+		a[k] = *thisReach
 	}
 
 	//iterate over all Reachabilities
@@ -113,49 +147,50 @@ func main() {
 		interSessionCount := 0
 		var interSessions = []int{}
 
-		lastEntry := "false"
+		//lastEntry can hav thre different states: "true", "false" and ""
+		lastEntry := ""
 		
 		//iterate over all files
 		for _, file := range files {
 			timestamp, err := time.Parse("2006-01-02--15-04-05", file.Name()[2:len(file.Name())-5])
 			if err != nil {
 				log.Fatal(err)
-				return
 			}
-			//if the timestamp is not in the map for this node
-			if _, ok := v.Reachable[timestamp]; !ok {
-				//count it as intersession
-				if thisInterSession == 0 {
-					interSessionCount++
-				}
-				thisInterSession++
-				continue
-			}
-			// if the node was reachable at this time
+			
+			//if the node was reachable at this time
 			if v.Reachable[timestamp] == "true" {
-				// if the current session hasn't started
-				if lastEntry == "false" {
-					// count it as a new session
+				//if the current session hasn't started
+				if lastEntry != "true" {
+					//count it as a new session
 					sessionCount++
+				}
+				//if the last entry was "false"
+				if lastEntry == "false" {
+					//end this intersession by appending its length to the array
 					interSessions = append(interSessions, thisInterSession)
 					thisInterSession = 0
 				}
-				// and increase the session length
+				//and increase the session length
 				thisSession++
 			} else {
-				if lastEntry == "true" {
+				if lastEntry != "false" {
+					//count it as a new intersession
 					interSessionCount++
+				}
+				if lastEntry == "true" {
+					//end this session by appending its length to the array
 					sessions = append(sessions, thisSession)
 					thisSession = 0
 				}
+				//and increase the intersession length
 				thisInterSession++
 			}
 			lastEntry = v.Reachable[timestamp]
 		}
-		if lastEntry == "false" {
-			interSessions = append(interSessions, thisInterSession)
-		} else {
+		if lastEntry == "true" {
 			sessions = append(sessions, thisSession)
+		} else {
+			interSessions = append(interSessions, thisInterSession)
 		}
 		
 		var sessionLength float32
@@ -183,6 +218,8 @@ func main() {
 		*thisReach = Reachability {
 			Sessions: sessionLength,
 			InterSessions: interSessionLength,
+			SCount: sessionCount,
+			ISCount: interSessionCount,
 			Count: v.Count,
 			Reachable: v.Reachable,
 		}
@@ -192,16 +229,11 @@ func main() {
 	ajson, err := json.MarshalIndent(a, "", "\t")
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	err = ioutil.WriteFile("./nodeInfo/sessionInfo.json", ajson, 0644)
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
-
-//	njson, _ := json.MarshalIndent(n, "", "\t")
-//	_ = ioutil.WriteFile("mapi.json", njson, 0644)
 
 	log.Printf("Ende, len: %d", len(a))
 }
