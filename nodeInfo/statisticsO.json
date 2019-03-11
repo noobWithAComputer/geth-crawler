@@ -1,20 +1,24 @@
 {
 	"avg_nodes": 8442.018,
 	"avg_edges": 358280.47,
-	"avg_resilience_targeted": 0.70141274,
-	"avg_resilience_random": 0.981999,
+	"min_resilience_targeted": 0.64679205,
+	"avg_resilience_targeted": 0.7014126,
+	"max_resilience_targeted": 0.7171935,
+	"min_resilience_random": 0.96676725,
+	"avg_resilience_random": 0.9819991,
+	"max_resilience_random": 0.98331195,
 	"avg_degree_min": 0.99404764,
 	"avg_degree_med": 75.14881,
-	"avg_degree_avg": 84.81356,
+	"avg_degree_avg": 84.81354,
 	"avg_degree_max": 652.6964,
 	"avg_in_degree_min": 0.67261904,
 	"avg_in_degree_med": 30.071428,
-	"avg_in_degree_avg": 42.40678,
+	"avg_in_degree_avg": 42.40677,
 	"avg_in_degree_max": 454.2381,
 	"avg_out_degree_min": 0,
 	"avg_out_degree_med": 46.113094,
-	"avg_out_degree_avg": 42.40678,
-	"avg_out_degree_max": 358280.47,
+	"avg_out_degree_avg": 42.40677,
+	"avg_out_degree_max": 374,
 	"stats": {
 		"2019-02-18T00:05:32Z": {
 			"nodes": 8347,
@@ -33,7 +37,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.343838,
-				"out_degree_max": 370138
+				"out_degree_max": 416
 			}
 		},
 		"2019-02-18T01:05:32Z": {
@@ -53,7 +57,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.257744,
-				"out_degree_max": 370039
+				"out_degree_max": 410
 			}
 		},
 		"2019-02-18T02:05:32Z": {
@@ -73,7 +77,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 48,
 				"out_degree_avg": 44.394257,
-				"out_degree_max": 372601
+				"out_degree_max": 400
 			}
 		},
 		"2019-02-18T03:05:32Z": {
@@ -93,7 +97,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.916786,
-				"out_degree_max": 366793
+				"out_degree_max": 449
 			}
 		},
 		"2019-02-18T04:05:32Z": {
@@ -113,7 +117,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 48,
 				"out_degree_avg": 44.68019,
-				"out_degree_max": 375537
+				"out_degree_max": 446
 			}
 		},
 		"2019-02-18T05:05:32Z": {
@@ -133,7 +137,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.325424,
-				"out_degree_max": 363327
+				"out_degree_max": 428
 			}
 		},
 		"2019-02-18T06:05:32Z": {
@@ -153,7 +157,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.01782,
-				"out_degree_max": 368121
+				"out_degree_max": 456
 			}
 		},
 		"2019-02-18T07:05:32Z": {
@@ -173,7 +177,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.141148,
-				"out_degree_max": 368711
+				"out_degree_max": 414
 			}
 		},
 		"2019-02-18T08:05:32Z": {
@@ -193,7 +197,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.990246,
-				"out_degree_max": 369782
+				"out_degree_max": 446
 			}
 		},
 		"2019-02-18T09:05:32Z": {
@@ -213,7 +217,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.252266,
-				"out_degree_max": 362973
+				"out_degree_max": 438
 			}
 		},
 		"2019-02-18T10:05:32Z": {
@@ -233,7 +237,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.950806,
-				"out_degree_max": 368088
+				"out_degree_max": 450
 			}
 		},
 		"2019-02-18T11:05:32Z": {
@@ -253,7 +257,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.59327,
-				"out_degree_max": 367840
+				"out_degree_max": 426
 			}
 		},
 		"2019-02-18T12:05:32Z": {
@@ -273,7 +277,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.155193,
-				"out_degree_max": 364273
+				"out_degree_max": 433
 			}
 		},
 		"2019-02-18T13:05:32Z": {
@@ -293,7 +297,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.976517,
-				"out_degree_max": 348573
+				"out_degree_max": 409
 			}
 		},
 		"2019-02-18T14:05:32Z": {
@@ -313,7 +317,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.628525,
-				"out_degree_max": 355394
+				"out_degree_max": 426
 			}
 		},
 		"2019-02-18T15:05:32Z": {
@@ -333,7 +337,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.618164,
-				"out_degree_max": 356160
+				"out_degree_max": 449
 			}
 		},
 		"2019-02-18T16:05:32Z": {
@@ -353,7 +357,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.41976,
-				"out_degree_max": 355011
+				"out_degree_max": 445
 			}
 		},
 		"2019-02-18T17:05:32Z": {
@@ -373,7 +377,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.46377,
-				"out_degree_max": 346803
+				"out_degree_max": 438
 			}
 		},
 		"2019-02-18T18:05:32Z": {
@@ -393,7 +397,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 44,
 				"out_degree_avg": 40.596764,
-				"out_degree_max": 338577
+				"out_degree_max": 419
 			}
 		},
 		"2019-02-18T19:05:32Z": {
@@ -413,7 +417,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.499165,
-				"out_degree_max": 347846
+				"out_degree_max": 416
 			}
 		},
 		"2019-02-18T20:05:32Z": {
@@ -433,7 +437,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.783573,
-				"out_degree_max": 368395
+				"out_degree_max": 432
 			}
 		},
 		"2019-02-18T21:05:32Z": {
@@ -453,7 +457,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.74599,
-				"out_degree_max": 368385
+				"out_degree_max": 431
 			}
 		},
 		"2019-02-18T22:05:32Z": {
@@ -473,7 +477,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.17993,
-				"out_degree_max": 362366
+				"out_degree_max": 427
 			}
 		},
 		"2019-02-18T23:05:32Z": {
@@ -493,7 +497,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.448708,
-				"out_degree_max": 346677
+				"out_degree_max": 426
 			}
 		},
 		"2019-02-19T00:05:32Z": {
@@ -513,7 +517,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.412193,
-				"out_degree_max": 363143
+				"out_degree_max": 431
 			}
 		},
 		"2019-02-19T01:05:32Z": {
@@ -533,7 +537,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.319458,
-				"out_degree_max": 353833
+				"out_degree_max": 414
 			}
 		},
 		"2019-02-19T02:05:32Z": {
@@ -553,7 +557,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.868404,
-				"out_degree_max": 358337
+				"out_degree_max": 392
 			}
 		},
 		"2019-02-19T03:05:32Z": {
@@ -573,7 +577,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.925117,
-				"out_degree_max": 359412
+				"out_degree_max": 419
 			}
 		},
 		"2019-02-19T04:05:32Z": {
@@ -593,7 +597,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.721813,
-				"out_degree_max": 358436
+				"out_degree_max": 448
 			}
 		},
 		"2019-02-19T05:05:32Z": {
@@ -613,7 +617,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.795425,
-				"out_degree_max": 348950
+				"out_degree_max": 440
 			}
 		},
 		"2019-02-19T06:05:32Z": {
@@ -633,7 +637,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.37064,
-				"out_degree_max": 350956
+				"out_degree_max": 416
 			}
 		},
 		"2019-02-19T07:05:32Z": {
@@ -653,7 +657,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.905975,
-				"out_degree_max": 361869
+				"out_degree_max": 431
 			}
 		},
 		"2019-02-19T08:05:32Z": {
@@ -673,7 +677,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.003338,
-				"out_degree_max": 352282
+				"out_degree_max": 424
 			}
 		},
 		"2019-02-19T09:05:32Z": {
@@ -693,7 +697,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.7727,
-				"out_degree_max": 340819
+				"out_degree_max": 425
 			}
 		},
 		"2019-02-19T10:05:32Z": {
@@ -713,7 +717,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.915173,
-				"out_degree_max": 369634
+				"out_degree_max": 471
 			}
 		},
 		"2019-02-19T11:05:32Z": {
@@ -733,7 +737,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.354725,
-				"out_degree_max": 356415
+				"out_degree_max": 460
 			}
 		},
 		"2019-02-19T12:05:32Z": {
@@ -753,7 +757,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.12609,
-				"out_degree_max": 352469
+				"out_degree_max": 447
 			}
 		},
 		"2019-02-19T13:05:32Z": {
@@ -773,7 +777,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.02317,
-				"out_degree_max": 345251
+				"out_degree_max": 435
 			}
 		},
 		"2019-02-19T14:05:32Z": {
@@ -793,7 +797,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 43,
 				"out_degree_avg": 40.067055,
-				"out_degree_max": 335802
+				"out_degree_max": 458
 			}
 		},
 		"2019-02-19T15:05:32Z": {
@@ -813,7 +817,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.474255,
-				"out_degree_max": 353853
+				"out_degree_max": 478
 			}
 		},
 		"2019-02-19T16:05:32Z": {
@@ -833,7 +837,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.99905,
-				"out_degree_max": 353716
+				"out_degree_max": 455
 			}
 		},
 		"2019-02-19T17:05:32Z": {
@@ -853,7 +857,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.52915,
-				"out_degree_max": 368866
+				"out_degree_max": 466
 			}
 		},
 		"2019-02-19T18:05:32Z": {
@@ -873,7 +877,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.45379,
-				"out_degree_max": 373234
+				"out_degree_max": 423
 			}
 		},
 		"2019-02-19T19:05:32Z": {
@@ -893,7 +897,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.985485,
-				"out_degree_max": 372733
+				"out_degree_max": 422
 			}
 		},
 		"2019-02-19T20:05:32Z": {
@@ -913,7 +917,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.933445,
-				"out_degree_max": 362530
+				"out_degree_max": 478
 			}
 		},
 		"2019-02-19T21:05:32Z": {
@@ -933,7 +937,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.461464,
-				"out_degree_max": 376144
+				"out_degree_max": 478
 			}
 		},
 		"2019-02-19T22:05:32Z": {
@@ -953,7 +957,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.99422,
-				"out_degree_max": 372895
+				"out_degree_max": 471
 			}
 		},
 		"2019-02-19T23:05:32Z": {
@@ -973,7 +977,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.77796,
-				"out_degree_max": 361046
+				"out_degree_max": 422
 			}
 		},
 		"2019-02-20T00:05:32Z": {
@@ -993,7 +997,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.07631,
-				"out_degree_max": 361841
+				"out_degree_max": 410
 			}
 		},
 		"2019-02-20T01:05:32Z": {
@@ -1013,7 +1017,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.772923,
-				"out_degree_max": 368568
+				"out_degree_max": 432
 			}
 		},
 		"2019-02-20T02:05:32Z": {
@@ -1033,7 +1037,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.196796,
-				"out_degree_max": 363933
+				"out_degree_max": 429
 			}
 		},
 		"2019-02-20T03:05:32Z": {
@@ -1053,7 +1057,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.474655,
-				"out_degree_max": 367926
+				"out_degree_max": 465
 			}
 		},
 		"2019-02-20T04:05:32Z": {
@@ -1073,7 +1077,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.56545,
-				"out_degree_max": 368433
+				"out_degree_max": 449
 			}
 		},
 		"2019-02-20T05:05:32Z": {
@@ -1093,7 +1097,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.22047,
-				"out_degree_max": 364824
+				"out_degree_max": 434
 			}
 		},
 		"2019-02-20T06:05:32Z": {
@@ -1113,7 +1117,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.993862,
-				"out_degree_max": 372672
+				"out_degree_max": 432
 			}
 		},
 		"2019-02-20T07:05:32Z": {
@@ -1133,7 +1137,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.64017,
-				"out_degree_max": 368934
+				"out_degree_max": 429
 			}
 		},
 		"2019-02-20T08:05:32Z": {
@@ -1153,7 +1157,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.196945,
-				"out_degree_max": 373199
+				"out_degree_max": 451
 			}
 		},
 		"2019-02-20T09:05:32Z": {
@@ -1173,7 +1177,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 48,
 				"out_degree_avg": 45.6495,
-				"out_degree_max": 389162
+				"out_degree_max": 446
 			}
 		},
 		"2019-02-20T10:05:32Z": {
@@ -1193,7 +1197,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.99503,
-				"out_degree_max": 371802
+				"out_degree_max": 456
 			}
 		},
 		"2019-02-20T11:05:32Z": {
@@ -1213,7 +1217,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 48,
 				"out_degree_avg": 44.95791,
-				"out_degree_max": 383446
+				"out_degree_max": 437
 			}
 		},
 		"2019-02-20T12:05:32Z": {
@@ -1233,7 +1237,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.2267,
-				"out_degree_max": 365914
+				"out_degree_max": 432
 			}
 		},
 		"2019-02-20T13:05:32Z": {
@@ -1253,7 +1257,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.25859,
-				"out_degree_max": 356578
+				"out_degree_max": 437
 			}
 		},
 		"2019-02-20T14:05:32Z": {
@@ -1273,7 +1277,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.515392,
-				"out_degree_max": 370316
+				"out_degree_max": 465
 			}
 		},
 		"2019-02-20T15:05:32Z": {
@@ -1293,7 +1297,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.572388,
-				"out_degree_max": 370191
+				"out_degree_max": 451
 			}
 		},
 		"2019-02-20T16:05:32Z": {
@@ -1313,7 +1317,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.599365,
-				"out_degree_max": 370333
+				"out_degree_max": 462
 			}
 		},
 		"2019-02-20T17:05:32Z": {
@@ -1333,7 +1337,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.729332,
-				"out_degree_max": 372399
+				"out_degree_max": 449
 			}
 		},
 		"2019-02-20T18:05:32Z": {
@@ -1353,7 +1357,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.635056,
-				"out_degree_max": 361460
+				"out_degree_max": 447
 			}
 		},
 		"2019-02-20T19:05:32Z": {
@@ -1373,7 +1377,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.794624,
-				"out_degree_max": 376371
+				"out_degree_max": 410
 			}
 		},
 		"2019-02-20T20:05:32Z": {
@@ -1393,7 +1397,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.84957,
-				"out_degree_max": 364607
+				"out_degree_max": 438
 			}
 		},
 		"2019-02-20T21:05:32Z": {
@@ -1413,7 +1417,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.738003,
-				"out_degree_max": 362461
+				"out_degree_max": 454
 			}
 		},
 		"2019-02-20T22:05:32Z": {
@@ -1433,7 +1437,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.93352,
-				"out_degree_max": 364248
+				"out_degree_max": 445
 			}
 		},
 		"2019-02-20T23:05:32Z": {
@@ -1453,7 +1457,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.71837,
-				"out_degree_max": 365573
+				"out_degree_max": 432
 			}
 		},
 		"2019-02-21T00:05:32Z": {
@@ -1473,7 +1477,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.68811,
-				"out_degree_max": 370781
+				"out_degree_max": 417
 			}
 		},
 		"2019-02-21T01:05:32Z": {
@@ -1493,7 +1497,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.711838,
-				"out_degree_max": 369671
+				"out_degree_max": 423
 			}
 		},
 		"2019-02-21T02:05:32Z": {
@@ -1513,7 +1517,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 44.483097,
-				"out_degree_max": 378996
+				"out_degree_max": 411
 			}
 		},
 		"2019-02-21T03:05:32Z": {
@@ -1533,7 +1537,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.067814,
-				"out_degree_max": 365818
+				"out_degree_max": 410
 			}
 		},
 		"2019-02-21T04:05:32Z": {
@@ -1553,7 +1557,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.931408,
-				"out_degree_max": 353943
+				"out_degree_max": 364
 			}
 		},
 		"2019-02-21T05:05:32Z": {
@@ -1573,7 +1577,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.753372,
-				"out_degree_max": 364558
+				"out_degree_max": 420
 			}
 		},
 		"2019-02-21T06:05:32Z": {
@@ -1593,7 +1597,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.62719,
-				"out_degree_max": 354289
+				"out_degree_max": 390
 			}
 		},
 		"2019-02-21T07:05:32Z": {
@@ -1613,7 +1617,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.667732,
-				"out_degree_max": 369167
+				"out_degree_max": 420
 			}
 		},
 		"2019-02-21T08:05:32Z": {
@@ -1633,7 +1637,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.09269,
-				"out_degree_max": 364952
+				"out_degree_max": 391
 			}
 		},
 		"2019-02-21T09:05:32Z": {
@@ -1653,7 +1657,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.99358,
-				"out_degree_max": 353250
+				"out_degree_max": 383
 			}
 		},
 		"2019-02-21T10:05:32Z": {
@@ -1673,7 +1677,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.973,
-				"out_degree_max": 367634
+				"out_degree_max": 448
 			}
 		},
 		"2019-02-21T11:05:32Z": {
@@ -1693,7 +1697,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.67312,
-				"out_degree_max": 365922
+				"out_degree_max": 463
 			}
 		},
 		"2019-02-21T12:05:32Z": {
@@ -1713,7 +1717,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.408333,
-				"out_degree_max": 368884
+				"out_degree_max": 446
 			}
 		},
 		"2019-02-21T13:05:32Z": {
@@ -1733,7 +1737,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.960598,
-				"out_degree_max": 375995
+				"out_degree_max": 434
 			}
 		},
 		"2019-02-21T14:05:32Z": {
@@ -1753,7 +1757,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.92149,
-				"out_degree_max": 374826
+				"out_degree_max": 438
 			}
 		},
 		"2019-02-21T15:05:32Z": {
@@ -1773,7 +1777,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.005405,
-				"out_degree_max": 365933
+				"out_degree_max": 442
 			}
 		},
 		"2019-02-21T16:05:32Z": {
@@ -1793,7 +1797,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.65673,
-				"out_degree_max": 366336
+				"out_degree_max": 449
 			}
 		},
 		"2019-02-21T17:05:32Z": {
@@ -1813,7 +1817,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.490532,
-				"out_degree_max": 357192
+				"out_degree_max": 433
 			}
 		},
 		"2019-02-21T18:05:32Z": {
@@ -1833,7 +1837,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.70295,
-				"out_degree_max": 375015
+				"out_degree_max": 419
 			}
 		},
 		"2019-02-21T19:05:32Z": {
@@ -1853,7 +1857,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.956684,
-				"out_degree_max": 359359
+				"out_degree_max": 403
 			}
 		},
 		"2019-02-21T20:05:32Z": {
@@ -1873,7 +1877,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 43,
 				"out_degree_avg": 40.551506,
-				"out_degree_max": 344850
+				"out_degree_max": 437
 			}
 		},
 		"2019-02-21T21:05:32Z": {
@@ -1893,7 +1897,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 44,
 				"out_degree_avg": 40.79583,
-				"out_degree_max": 348274
+				"out_degree_max": 448
 			}
 		},
 		"2019-02-21T22:05:32Z": {
@@ -1913,7 +1917,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.237843,
-				"out_degree_max": 350233
+				"out_degree_max": 460
 			}
 		},
 		"2019-02-21T23:05:32Z": {
@@ -1933,7 +1937,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.58202,
-				"out_degree_max": 373803
+				"out_degree_max": 443
 			}
 		},
 		"2019-02-22T00:05:32Z": {
@@ -1953,7 +1957,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.3304,
-				"out_degree_max": 365269
+				"out_degree_max": 430
 			}
 		},
 		"2019-02-22T01:05:32Z": {
@@ -1973,7 +1977,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.60238,
-				"out_degree_max": 368894
+				"out_degree_max": 420
 			}
 		},
 		"2019-02-22T02:05:32Z": {
@@ -1993,7 +1997,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.526806,
-				"out_degree_max": 366496
+				"out_degree_max": 436
 			}
 		},
 		"2019-02-22T03:05:32Z": {
@@ -2013,7 +2017,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.101086,
-				"out_degree_max": 368816
+				"out_degree_max": 444
 			}
 		},
 		"2019-02-22T04:05:32Z": {
@@ -2033,7 +2037,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.45227,
-				"out_degree_max": 353049
+				"out_degree_max": 396
 			}
 		},
 		"2019-02-22T05:05:32Z": {
@@ -2053,7 +2057,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.468166,
-				"out_degree_max": 362211
+				"out_degree_max": 345
 			}
 		},
 		"2019-02-22T06:05:32Z": {
@@ -2073,7 +2077,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.43419,
-				"out_degree_max": 368930
+				"out_degree_max": 421
 			}
 		},
 		"2019-02-22T07:05:32Z": {
@@ -2093,7 +2097,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.580578,
-				"out_degree_max": 344732
+				"out_degree_max": 325
 			}
 		},
 		"2019-02-22T08:05:32Z": {
@@ -2113,7 +2117,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.79915,
-				"out_degree_max": 344712
+				"out_degree_max": 418
 			}
 		},
 		"2019-02-22T09:05:32Z": {
@@ -2133,7 +2137,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 43,
 				"out_degree_avg": 40.083733,
-				"out_degree_max": 344199
+				"out_degree_max": 439
 			}
 		},
 		"2019-02-22T10:05:32Z": {
@@ -2153,7 +2157,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.770874,
-				"out_degree_max": 364194
+				"out_degree_max": 424
 			}
 		},
 		"2019-02-22T11:05:32Z": {
@@ -2173,7 +2177,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 44,
 				"out_degree_avg": 41.383133,
-				"out_degree_max": 354281
+				"out_degree_max": 419
 			}
 		},
 		"2019-02-22T12:05:32Z": {
@@ -2193,7 +2197,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.454388,
-				"out_degree_max": 362985
+				"out_degree_max": 405
 			}
 		},
 		"2019-02-22T13:05:26Z": {
@@ -2213,7 +2217,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 22,
 				"out_degree_avg": 23.898724,
-				"out_degree_max": 142293
+				"out_degree_max": 226
 			}
 		},
 		"2019-02-22T14:05:32Z": {
@@ -2233,7 +2237,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.650467,
-				"out_degree_max": 356528
+				"out_degree_max": 180
 			}
 		},
 		"2019-02-22T15:05:32Z": {
@@ -2253,7 +2257,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 42,
 				"out_degree_avg": 39.712246,
-				"out_degree_max": 336323
+				"out_degree_max": 194
 			}
 		},
 		"2019-02-22T16:05:32Z": {
@@ -2273,7 +2277,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 41,
 				"out_degree_avg": 39.3522,
-				"out_degree_max": 330283
+				"out_degree_max": 177
 			}
 		},
 		"2019-02-22T17:05:32Z": {
@@ -2293,7 +2297,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 42,
 				"out_degree_avg": 39.807438,
-				"out_degree_max": 338204
+				"out_degree_max": 174
 			}
 		},
 		"2019-02-22T18:05:32Z": {
@@ -2313,7 +2317,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 43,
 				"out_degree_avg": 39.905514,
-				"out_degree_max": 337880
+				"out_degree_max": 168
 			}
 		},
 		"2019-02-22T19:05:32Z": {
@@ -2333,7 +2337,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 40,
 				"out_degree_avg": 39.019417,
-				"out_degree_max": 329597
+				"out_degree_max": 163
 			}
 		},
 		"2019-02-22T20:05:32Z": {
@@ -2353,7 +2357,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.01035,
-				"out_degree_max": 361289
+				"out_degree_max": 192
 			}
 		},
 		"2019-02-22T21:05:32Z": {
@@ -2373,7 +2377,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.96269,
-				"out_degree_max": 357648
+				"out_degree_max": 174
 			}
 		},
 		"2019-02-22T22:05:32Z": {
@@ -2393,7 +2397,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.63885,
-				"out_degree_max": 353264
+				"out_degree_max": 171
 			}
 		},
 		"2019-02-22T23:05:32Z": {
@@ -2413,7 +2417,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.94883,
-				"out_degree_max": 346509
+				"out_degree_max": 185
 			}
 		},
 		"2019-02-23T00:05:32Z": {
@@ -2433,7 +2437,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.366398,
-				"out_degree_max": 352814
+				"out_degree_max": 166
 			}
 		},
 		"2019-02-23T01:05:32Z": {
@@ -2453,7 +2457,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.968647,
-				"out_degree_max": 358748
+				"out_degree_max": 263
 			}
 		},
 		"2019-02-23T02:05:32Z": {
@@ -2473,7 +2477,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.558517,
-				"out_degree_max": 355450
+				"out_degree_max": 242
 			}
 		},
 		"2019-02-23T03:05:32Z": {
@@ -2493,7 +2497,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.338722,
-				"out_degree_max": 361361
+				"out_degree_max": 208
 			}
 		},
 		"2019-02-23T04:05:32Z": {
@@ -2513,7 +2517,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.494286,
-				"out_degree_max": 364431
+				"out_degree_max": 235
 			}
 		},
 		"2019-02-23T05:05:32Z": {
@@ -2533,7 +2537,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.824203,
-				"out_degree_max": 365890
+				"out_degree_max": 229
 			}
 		},
 		"2019-02-23T06:05:32Z": {
@@ -2553,7 +2557,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.09331,
-				"out_degree_max": 356825
+				"out_degree_max": 275
 			}
 		},
 		"2019-02-23T07:05:32Z": {
@@ -2573,7 +2577,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.8604,
-				"out_degree_max": 364742
+				"out_degree_max": 259
 			}
 		},
 		"2019-02-23T08:05:32Z": {
@@ -2593,7 +2597,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.08193,
-				"out_degree_max": 356981
+				"out_degree_max": 267
 			}
 		},
 		"2019-02-23T09:05:32Z": {
@@ -2613,7 +2617,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.90629,
-				"out_degree_max": 363073
+				"out_degree_max": 306
 			}
 		},
 		"2019-02-23T10:05:32Z": {
@@ -2633,7 +2637,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.22069,
-				"out_degree_max": 358327
+				"out_degree_max": 302
 			}
 		},
 		"2019-02-23T11:05:32Z": {
@@ -2653,7 +2657,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.787754,
-				"out_degree_max": 354193
+				"out_degree_max": 305
 			}
 		},
 		"2019-02-23T12:05:32Z": {
@@ -2673,7 +2677,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.394184,
-				"out_degree_max": 361580
+				"out_degree_max": 274
 			}
 		},
 		"2019-02-23T13:05:32Z": {
@@ -2693,7 +2697,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.377888,
-				"out_degree_max": 345464
+				"out_degree_max": 279
 			}
 		},
 		"2019-02-23T14:05:33Z": {
@@ -2713,7 +2717,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.825188,
-				"out_degree_max": 371287
+				"out_degree_max": 310
 			}
 		},
 		"2019-02-23T15:05:32Z": {
@@ -2733,7 +2737,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.34798,
-				"out_degree_max": 356570
+				"out_degree_max": 301
 			}
 		},
 		"2019-02-23T16:05:32Z": {
@@ -2753,7 +2757,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.806236,
-				"out_degree_max": 360985
+				"out_degree_max": 330
 			}
 		},
 		"2019-02-23T17:05:32Z": {
@@ -2773,7 +2777,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.687412,
-				"out_degree_max": 360111
+				"out_degree_max": 304
 			}
 		},
 		"2019-02-23T18:05:32Z": {
@@ -2793,7 +2797,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.11198,
-				"out_degree_max": 346574
+				"out_degree_max": 331
 			}
 		},
 		"2019-02-23T19:05:32Z": {
@@ -2813,7 +2817,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.34797,
-				"out_degree_max": 349349
+				"out_degree_max": 278
 			}
 		},
 		"2019-02-23T20:05:32Z": {
@@ -2833,7 +2837,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.67868,
-				"out_degree_max": 362342
+				"out_degree_max": 288
 			}
 		},
 		"2019-02-23T21:05:32Z": {
@@ -2853,7 +2857,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.941837,
-				"out_degree_max": 363245
+				"out_degree_max": 307
 			}
 		},
 		"2019-02-23T22:05:32Z": {
@@ -2873,7 +2877,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.61175,
-				"out_degree_max": 359004
+				"out_degree_max": 326
 			}
 		},
 		"2019-02-23T23:05:32Z": {
@@ -2893,7 +2897,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.97376,
-				"out_degree_max": 363558
+				"out_degree_max": 293
 			}
 		},
 		"2019-02-24T00:05:32Z": {
@@ -2913,7 +2917,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.929443,
-				"out_degree_max": 354178
+				"out_degree_max": 305
 			}
 		},
 		"2019-02-24T01:05:33Z": {
@@ -2933,7 +2937,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.314484,
-				"out_degree_max": 366094
+				"out_degree_max": 261
 			}
 		},
 		"2019-02-24T02:05:32Z": {
@@ -2953,7 +2957,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.73978,
-				"out_degree_max": 356578
+				"out_degree_max": 285
 			}
 		},
 		"2019-02-24T03:05:32Z": {
@@ -2973,7 +2977,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.12961,
-				"out_degree_max": 349067
+				"out_degree_max": 286
 			}
 		},
 		"2019-02-24T04:05:33Z": {
@@ -2993,7 +2997,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.469513,
-				"out_degree_max": 368578
+				"out_degree_max": 301
 			}
 		},
 		"2019-02-24T05:05:32Z": {
@@ -3013,7 +3017,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.591614,
-				"out_degree_max": 359601
+				"out_degree_max": 294
 			}
 		},
 		"2019-02-24T06:05:32Z": {
@@ -3033,7 +3037,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 41.99705,
-				"out_degree_max": 356261
+				"out_degree_max": 295
 			}
 		},
 		"2019-02-24T07:05:32Z": {
@@ -3053,7 +3057,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.769577,
-				"out_degree_max": 353663
+				"out_degree_max": 267
 			}
 		},
 		"2019-02-24T08:05:33Z": {
@@ -3073,7 +3077,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.92231,
-				"out_degree_max": 365183
+				"out_degree_max": 308
 			}
 		},
 		"2019-02-24T09:05:32Z": {
@@ -3093,7 +3097,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.831707,
-				"out_degree_max": 346947
+				"out_degree_max": 293
 			}
 		},
 		"2019-02-24T10:05:32Z": {
@@ -3113,7 +3117,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.42565,
-				"out_degree_max": 358921
+				"out_degree_max": 306
 			}
 		},
 		"2019-02-24T11:05:32Z": {
@@ -3133,7 +3137,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.45185,
-				"out_degree_max": 352548
+				"out_degree_max": 286
 			}
 		},
 		"2019-02-24T12:05:32Z": {
@@ -3153,7 +3157,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.16293,
-				"out_degree_max": 357120
+				"out_degree_max": 293
 			}
 		},
 		"2019-02-24T13:05:32Z": {
@@ -3173,7 +3177,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 43.090275,
-				"out_degree_max": 364199
+				"out_degree_max": 270
 			}
 		},
 		"2019-02-24T14:05:32Z": {
@@ -3193,7 +3197,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 41.07508,
-				"out_degree_max": 349590
+				"out_degree_max": 314
 			}
 		},
 		"2019-02-24T15:05:32Z": {
@@ -3213,7 +3217,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.595154,
-				"out_degree_max": 340025
+				"out_degree_max": 308
 			}
 		},
 		"2019-02-24T16:05:32Z": {
@@ -3233,7 +3237,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.54592,
-				"out_degree_max": 339491
+				"out_degree_max": 316
 			}
 		},
 		"2019-02-24T17:05:32Z": {
@@ -3253,7 +3257,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 44,
 				"out_degree_avg": 40.423588,
-				"out_degree_max": 337254
+				"out_degree_max": 293
 			}
 		},
 		"2019-02-24T18:05:32Z": {
@@ -3273,7 +3277,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 44,
 				"out_degree_avg": 40.464233,
-				"out_degree_max": 338281
+				"out_degree_max": 296
 			}
 		},
 		"2019-02-24T19:05:32Z": {
@@ -3293,7 +3297,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 41,
 				"out_degree_avg": 39.139446,
-				"out_degree_max": 324466
+				"out_degree_max": 299
 			}
 		},
 		"2019-02-24T20:05:32Z": {
@@ -3313,7 +3317,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 45,
 				"out_degree_avg": 40.99761,
-				"out_degree_max": 342617
+				"out_degree_max": 313
 			}
 		},
 		"2019-02-24T21:05:32Z": {
@@ -3333,7 +3337,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 41.1979,
-				"out_degree_max": 345362
+				"out_degree_max": 316
 			}
 		},
 		"2019-02-24T22:05:32Z": {
@@ -3353,7 +3357,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 46,
 				"out_degree_avg": 42.06192,
-				"out_degree_max": 352563
+				"out_degree_max": 314
 			}
 		},
 		"2019-02-24T23:05:32Z": {
@@ -3373,7 +3377,7 @@
 				"out_degree_min": 0,
 				"out_degree_med": 47,
 				"out_degree_avg": 42.6978,
-				"out_degree_max": 361138
+				"out_degree_max": 291
 			}
 		}
 	}

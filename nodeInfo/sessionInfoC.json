@@ -1,0 +1,688 @@
+{
+	"": {
+		"nodes": 545,
+		"sessionlength": 40.98285,
+		"intersessionlength": 204.25319,
+		"sessioncount": 2.7651377,
+		"intersessioncount": 3.5174313
+	},
+	"Algeria": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Andorra": {
+		"nodes": 4,
+		"sessionlength": 77.962494,
+		"intersessionlength": 205.76315,
+		"sessioncount": 6.75,
+		"intersessioncount": 6.5
+	},
+	"Argentina": {
+		"nodes": 50,
+		"sessionlength": 255.40234,
+		"intersessionlength": 67.6799,
+		"sessioncount": 3.54,
+		"intersessioncount": 3.16
+	},
+	"Australia": {
+		"nodes": 270,
+		"sessionlength": 67.79299,
+		"intersessionlength": 164.8918,
+		"sessioncount": 4.3962965,
+		"intersessioncount": 4.9259257
+	},
+	"Austria": {
+		"nodes": 59,
+		"sessionlength": 56.734684,
+		"intersessionlength": 144.14609,
+		"sessioncount": 6.3728814,
+		"intersessioncount": 6.9491525
+	},
+	"Bahamas": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Bangladesh": {
+		"nodes": 4,
+		"sessionlength": 1.5,
+		"intersessionlength": 251.25,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Belarus": {
+		"nodes": 42,
+		"sessionlength": 51.344337,
+		"intersessionlength": 153.5052,
+		"sessioncount": 4.6190476,
+		"intersessioncount": 5.3095236
+	},
+	"Belgium": {
+		"nodes": 31,
+		"sessionlength": 90.37638,
+		"intersessionlength": 146.74959,
+		"sessioncount": 5.2580647,
+		"intersessioncount": 5.451613
+	},
+	"Bolivia": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 167.33333,
+		"sessioncount": 2,
+		"intersessioncount": 3
+	},
+	"Bosnia and Herzegovina": {
+		"nodes": 5,
+		"sessionlength": 13.664999,
+		"intersessionlength": 91.543015,
+		"sessioncount": 7.2,
+		"intersessioncount": 7.8
+	},
+	"Brazil": {
+		"nodes": 289,
+		"sessionlength": 30.859625,
+		"intersessionlength": 199.68382,
+		"sessioncount": 2.1903114,
+		"intersessioncount": 2.9550173
+	},
+	"Bulgaria": {
+		"nodes": 55,
+		"sessionlength": 150.65358,
+		"intersessionlength": 122.784676,
+		"sessioncount": 5.8545456,
+		"intersessioncount": 6.090909
+	},
+	"Canada": {
+		"nodes": 1078,
+		"sessionlength": 89.72886,
+		"intersessionlength": 172.65248,
+		"sessioncount": 3.5723562,
+		"intersessioncount": 4.0500927
+	},
+	"Cayman Islands": {
+		"nodes": 2,
+		"sessionlength": 13.8,
+		"intersessionlength": 164.6,
+		"sessioncount": 3,
+		"intersessioncount": 3.5
+	},
+	"Chile": {
+		"nodes": 4,
+		"sessionlength": 6.6433973,
+		"intersessionlength": 127.67016,
+		"sessioncount": 16.25,
+		"intersessioncount": 16.25
+	},
+	"China": {
+		"nodes": 1911,
+		"sessionlength": 43.9362,
+		"intersessionlength": 130.7181,
+		"sessioncount": 8.615908,
+		"intersessioncount": 9.049189
+	},
+	"Colombia": {
+		"nodes": 2,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Croatia": {
+		"nodes": 23,
+		"sessionlength": 16.273018,
+		"intersessionlength": 215.60869,
+		"sessioncount": 2.173913,
+		"intersessioncount": 3
+	},
+	"Curaçao": {
+		"nodes": 1,
+		"sessionlength": 504,
+		"intersessionlength": 0,
+		"sessioncount": 1,
+		"intersessioncount": 0
+	},
+	"Cyprus": {
+		"nodes": 4,
+		"sessionlength": 71.03125,
+		"intersessionlength": 100.638885,
+		"sessioncount": 3.75,
+		"intersessioncount": 4.25
+	},
+	"Czechia": {
+		"nodes": 67,
+		"sessionlength": 142.63708,
+		"intersessionlength": 74.47029,
+		"sessioncount": 7.522388,
+		"intersessioncount": 7.4179106
+	},
+	"Denmark": {
+		"nodes": 9,
+		"sessionlength": 67.326096,
+		"intersessionlength": 168.29373,
+		"sessioncount": 8.555555,
+		"intersessioncount": 9.111111
+	},
+	"Dominican Republic": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Egypt": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Estonia": {
+		"nodes": 6,
+		"sessionlength": 85.25,
+		"intersessionlength": 148.93056,
+		"sessioncount": 2,
+		"intersessioncount": 2.6666667
+	},
+	"Finland": {
+		"nodes": 608,
+		"sessionlength": 244.36215,
+		"intersessionlength": 70.415794,
+		"sessioncount": 5.2516446,
+		"intersessioncount": 4.9144735
+	},
+	"France": {
+		"nodes": 888,
+		"sessionlength": 187.49231,
+		"intersessionlength": 104.36931,
+		"sessioncount": 5.525901,
+		"intersessioncount": 5.4527025
+	},
+	"French Guiana": {
+		"nodes": 1,
+		"sessionlength": 4,
+		"intersessionlength": 97.6,
+		"sessioncount": 4,
+		"intersessioncount": 5
+	},
+	"Georgia": {
+		"nodes": 5,
+		"sessionlength": 5.1692643,
+		"intersessionlength": 155.68181,
+		"sessioncount": 9.2,
+		"intersessioncount": 10
+	},
+	"Germany": {
+		"nodes": 3313,
+		"sessionlength": 152.67801,
+		"intersessionlength": 120.4065,
+		"sessioncount": 5.579535,
+		"intersessioncount": 5.6839724
+	},
+	"Ghana": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Greece": {
+		"nodes": 23,
+		"sessionlength": 72.67288,
+		"intersessionlength": 158.96016,
+		"sessioncount": 3.8695652,
+		"intersessioncount": 4.521739
+	},
+	"Guatemala": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Hong Kong": {
+		"nodes": 268,
+		"sessionlength": 82.39565,
+		"intersessionlength": 124.37074,
+		"sessioncount": 7.7089553,
+		"intersessioncount": 8.104478
+	},
+	"Hungary": {
+		"nodes": 21,
+		"sessionlength": 86.85228,
+		"intersessionlength": 123.80353,
+		"sessioncount": 15.047619,
+		"intersessioncount": 15.476191
+	},
+	"Iceland": {
+		"nodes": 5,
+		"sessionlength": 145.79333,
+		"intersessionlength": 109.111534,
+		"sessioncount": 4.6,
+		"intersessioncount": 4.4
+	},
+	"India": {
+		"nodes": 599,
+		"sessionlength": 34.894695,
+		"intersessionlength": 207.5967,
+		"sessioncount": 2.2103505,
+		"intersessioncount": 2.9799666
+	},
+	"Indonesia": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Iran": {
+		"nodes": 7,
+		"sessionlength": 7.535714,
+		"intersessionlength": 197.58572,
+		"sessioncount": 2.5714285,
+		"intersessioncount": 3.5714285
+	},
+	"Ireland": {
+		"nodes": 361,
+		"sessionlength": 112.20634,
+		"intersessionlength": 131.34789,
+		"sessioncount": 6.3102493,
+		"intersessioncount": 6.573407
+	},
+	"Israel": {
+		"nodes": 19,
+		"sessionlength": 27.8134,
+		"intersessionlength": 183.9649,
+		"sessioncount": 2.3157895,
+		"intersessioncount": 3.1052632
+	},
+	"Italy": {
+		"nodes": 201,
+		"sessionlength": 184.54703,
+		"intersessionlength": 80.42984,
+		"sessioncount": 6.870647,
+		"intersessioncount": 6.6567163
+	},
+	"Japan": {
+		"nodes": 889,
+		"sessionlength": 52.3064,
+		"intersessionlength": 173.70386,
+		"sessioncount": 3.9178853,
+		"intersessioncount": 4.429696
+	},
+	"Kazakhstan": {
+		"nodes": 9,
+		"sessionlength": 29.36111,
+		"intersessionlength": 180.52594,
+		"sessioncount": 1.8888888,
+		"intersessioncount": 2.6666667
+	},
+	"Kyrgyzstan": {
+		"nodes": 3,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Latvia": {
+		"nodes": 10,
+		"sessionlength": 109.375,
+		"intersessionlength": 109.34166,
+		"sessioncount": 2.9,
+		"intersessioncount": 3
+	},
+	"Lebanon": {
+		"nodes": 1,
+		"sessionlength": 504,
+		"intersessionlength": 0,
+		"sessioncount": 1,
+		"intersessioncount": 0
+	},
+	"Luxembourg": {
+		"nodes": 8,
+		"sessionlength": 193.33334,
+		"intersessionlength": 78.90625,
+		"sessioncount": 3.25,
+		"intersessioncount": 3
+	},
+	"Macao": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 62.125,
+		"sessioncount": 7,
+		"intersessioncount": 8
+	},
+	"Malaysia": {
+		"nodes": 18,
+		"sessionlength": 40.86976,
+		"intersessionlength": 120.64814,
+		"sessioncount": 11,
+		"intersessioncount": 11.333333
+	},
+	"Maldives": {
+		"nodes": 1,
+		"sessionlength": 1.5,
+		"intersessionlength": 167,
+		"sessioncount": 2,
+		"intersessioncount": 3
+	},
+	"Malta": {
+		"nodes": 5,
+		"sessionlength": 2.363083,
+		"intersessionlength": 120.33756,
+		"sessioncount": 22.2,
+		"intersessioncount": 23
+	},
+	"Mexico": {
+		"nodes": 35,
+		"sessionlength": 6.311516,
+		"intersessionlength": 183.56064,
+		"sessioncount": 4.3714285,
+		"intersessioncount": 5.2285714
+	},
+	"Mongolia": {
+		"nodes": 1,
+		"sessionlength": 1.2686567,
+		"intersessionlength": 6.2537313,
+		"sessioncount": 67,
+		"intersessioncount": 67
+	},
+	"Montenegro": {
+		"nodes": 2,
+		"sessionlength": 84.333336,
+		"intersessionlength": 62.666668,
+		"sessioncount": 7,
+		"intersessioncount": 7
+	},
+	"Morocco": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Nepal": {
+		"nodes": 1,
+		"sessionlength": 1.6666666,
+		"intersessionlength": 124.75,
+		"sessioncount": 3,
+		"intersessioncount": 4
+	},
+	"Netherlands": {
+		"nodes": 1256,
+		"sessionlength": 125.613495,
+		"intersessionlength": 148.56413,
+		"sessioncount": 5.428344,
+		"intersessioncount": 5.6584396
+	},
+	"New Zealand": {
+		"nodes": 18,
+		"sessionlength": 40.95555,
+		"intersessionlength": 132.3,
+		"sessioncount": 5.2222223,
+		"intersessioncount": 5.7222223
+	},
+	"Nigeria": {
+		"nodes": 4,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Norway": {
+		"nodes": 28,
+		"sessionlength": 54.910015,
+		"intersessionlength": 144.15337,
+		"sessioncount": 5.5,
+		"intersessioncount": 6.107143
+	},
+	"Pakistan": {
+		"nodes": 6,
+		"sessionlength": 104.666664,
+		"intersessionlength": 199.66667,
+		"sessioncount": 1,
+		"intersessioncount": 1.6666666
+	},
+	"Palestine": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Panama": {
+		"nodes": 4,
+		"sessionlength": 2.4,
+		"intersessionlength": 129.25967,
+		"sessioncount": 6,
+		"intersessioncount": 7
+	},
+	"Peru": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Philippines": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 167.33333,
+		"sessioncount": 2,
+		"intersessioncount": 3
+	},
+	"Poland": {
+		"nodes": 160,
+		"sessionlength": 231.8353,
+		"intersessionlength": 72.734566,
+		"sessioncount": 5.10625,
+		"intersessioncount": 4.84375
+	},
+	"Portugal": {
+		"nodes": 16,
+		"sessionlength": 56.094967,
+		"intersessionlength": 150.10881,
+		"sessioncount": 4.375,
+		"intersessioncount": 5
+	},
+	"Puerto Rico": {
+		"nodes": 1,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Republic of Lithuania": {
+		"nodes": 182,
+		"sessionlength": 152.5304,
+		"intersessionlength": 89.44848,
+		"sessioncount": 3.8241758,
+		"intersessioncount": 3.9725275
+	},
+	"Republic of Moldova": {
+		"nodes": 7,
+		"sessionlength": 6.857143,
+		"intersessionlength": 191.65477,
+		"sessioncount": 2.142857,
+		"intersessioncount": 3
+	},
+	"Romania": {
+		"nodes": 37,
+		"sessionlength": 32.0079,
+		"intersessionlength": 162.27094,
+		"sessioncount": 4.675676,
+		"intersessioncount": 5.4054055
+	},
+	"Russia": {
+		"nodes": 742,
+		"sessionlength": 85.7649,
+		"intersessionlength": 140.4707,
+		"sessioncount": 5.6132073,
+		"intersessioncount": 5.9905663
+	},
+	"Saudi Arabia": {
+		"nodes": 3,
+		"sessionlength": 1,
+		"intersessionlength": 251.5,
+		"sessioncount": 1,
+		"intersessioncount": 2
+	},
+	"Serbia": {
+		"nodes": 18,
+		"sessionlength": 55.112705,
+		"intersessionlength": 163.86565,
+		"sessioncount": 7.0555553,
+		"intersessioncount": 7.4444447
+	},
+	"Singapore": {
+		"nodes": 2333,
+		"sessionlength": 52.146717,
+		"intersessionlength": 200.84837,
+		"sessioncount": 3.0565796,
+		"intersessioncount": 3.7333906
+	},
+	"Slovakia": {
+		"nodes": 7,
+		"sessionlength": 227.82968,
+		"intersessionlength": 75.59066,
+		"sessioncount": 9.285714,
+		"intersessioncount": 9.142858
+	},
+	"Slovenia": {
+		"nodes": 21,
+		"sessionlength": 14.361778,
+		"intersessionlength": 179.3868,
+		"sessioncount": 9.142858,
+		"intersessioncount": 9.952381
+	},
+	"South Africa": {
+		"nodes": 22,
+		"sessionlength": 151.57933,
+		"intersessionlength": 93.53327,
+		"sessioncount": 11.181818,
+		"intersessioncount": 11.181818
+	},
+	"South Korea": {
+		"nodes": 834,
+		"sessionlength": 76.575485,
+		"intersessionlength": 135.30832,
+		"sessioncount": 7.347722,
+		"intersessioncount": 7.677458
+	},
+	"Spain": {
+		"nodes": 83,
+		"sessionlength": 56.89207,
+		"intersessionlength": 137.471,
+		"sessioncount": 7.915663,
+		"intersessioncount": 8.469879
+	},
+	"Sweden": {
+		"nodes": 60,
+		"sessionlength": 44.97139,
+		"intersessionlength": 170.22008,
+		"sessioncount": 4.6833334,
+		"intersessioncount": 5.3333335
+	},
+	"Switzerland": {
+		"nodes": 124,
+		"sessionlength": 73.9921,
+		"intersessionlength": 136.5675,
+		"sessioncount": 8.2338705,
+		"intersessioncount": 8.645162
+	},
+	"Taiwan": {
+		"nodes": 85,
+		"sessionlength": 87.54241,
+		"intersessionlength": 114.4958,
+		"sessioncount": 5.5882354,
+		"intersessioncount": 5.882353
+	},
+	"Thailand": {
+		"nodes": 47,
+		"sessionlength": 6.6092978,
+		"intersessionlength": 190.40273,
+		"sessioncount": 5.4680853,
+		"intersessioncount": 6.319149
+	},
+	"Tunisia": {
+		"nodes": 5,
+		"sessionlength": 1.5,
+		"intersessionlength": 203.98001,
+		"sessioncount": 1.8,
+		"intersessioncount": 2.8
+	},
+	"Turkey": {
+		"nodes": 93,
+		"sessionlength": 118.480606,
+		"intersessionlength": 114.75251,
+		"sessioncount": 4.688172,
+		"intersessioncount": 4.9569893
+	},
+	"Ukraine": {
+		"nodes": 154,
+		"sessionlength": 49.50924,
+		"intersessionlength": 143.10548,
+		"sessioncount": 5.3896103,
+		"intersessioncount": 5.9545455
+	},
+	"United Arab Emirates": {
+		"nodes": 23,
+		"sessionlength": 12.970496,
+		"intersessionlength": 179.96848,
+		"sessioncount": 2.3913043,
+		"intersessioncount": 3.3043478
+	},
+	"United Kingdom": {
+		"nodes": 1561,
+		"sessionlength": 72.83492,
+		"intersessionlength": 183.83286,
+		"sessioncount": 3.4778988,
+		"intersessioncount": 4.0454836
+	},
+	"United States": {
+		"nodes": 9788,
+		"sessionlength": 69.76063,
+		"intersessionlength": 179.20708,
+		"sessioncount": 4.0231915,
+		"intersessioncount": 4.581528
+	},
+	"Uruguay": {
+		"nodes": 3,
+		"sessionlength": 1.1111112,
+		"intersessionlength": 115.81481,
+		"sessioncount": 4.3333335,
+		"intersessioncount": 5.3333335
+	},
+	"Uzbekistan": {
+		"nodes": 4,
+		"sessionlength": 10.166666,
+		"intersessionlength": 166.70833,
+		"sessioncount": 5.5,
+		"intersessioncount": 6.25
+	},
+	"Venezuela": {
+		"nodes": 4,
+		"sessionlength": 1,
+		"intersessionlength": 192.58333,
+		"sessioncount": 2,
+		"intersessioncount": 3
+	},
+	"Vietnam": {
+		"nodes": 144,
+		"sessionlength": 11.143867,
+		"intersessionlength": 242.34215,
+		"sessioncount": 1.6319444,
+		"intersessioncount": 2.5416667
+	},
+	"Zimbabwe": {
+		"nodes": 1,
+		"sessionlength": 2.5,
+		"intersessionlength": 39.5,
+		"sessioncount": 12,
+		"intersessioncount": 12
+	}
+}
