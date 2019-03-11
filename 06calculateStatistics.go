@@ -62,8 +62,6 @@ type Statistic struct {
 //reads statistics for degree and resilience of each snapshot and calculates averages over all snapshots
 //saves the statistics to ./nodeInfo/statisticsA.json and ./nodeInfo/statisticsO.json for AS graphs and online graphs respectively
 func main() {
-//	var allStatsA = new(Statistic)
-//	var allStatsO = new(Statistic)
 	var statisticsA = make(map[time.Time]stats)
 	var statisticsO = make(map[time.Time]stats)
 	
@@ -103,7 +101,7 @@ func calculate(ftype string, statistics map[time.Time]stats) (Statistic) {
 	for _, file := range files {
 		fname := file.Name()
 		
-		//if they 
+		//if they contain the type of the file to look for (asorgs/online)
 		if strings.Contains(fname, ftype) {
 			readStats(fname, statistics)
 		}
@@ -153,6 +151,7 @@ func calculate(ftype string, statistics map[time.Time]stats) (Statistic) {
 	min_resilience_random := float32(1)
 	max_resilience_random := float32(0)
 	
+	//find min and max values
 	for _, s := range statistics {
 		if s.Resilience_targeted < min_resilience_targeted {
 			min_resilience_targeted = s.Resilience_targeted
@@ -210,6 +209,7 @@ func readStats(fname string, statistics map[time.Time]stats) {
 	content := string(raw)
 	contents := strings.Split(content, "\t")
 	
+	//get the data from the GTNA outputs
 	nodes, _ := strconv.ParseFloat(contents[1], 32)
 	edges, _ := strconv.ParseFloat(contents[9], 32)
 	degree_min, _ := strconv.ParseFloat(contents[17], 32)
@@ -233,7 +233,10 @@ func readStats(fname string, statistics map[time.Time]stats) {
 	content = string(raw)
 	contents = strings.Split(content, "\t")
 	
-	resilience_targeted, _ := strconv.ParseFloat(contents[1], 32)
+	resilience_targeted, err := strconv.ParseFloat(contents[1], 32)
+	if err != nil {
+		log.Fatal(err)
+	}
 	
 	raw, err = ioutil.ReadFile("./data/" + fname + "/CRITICAL_POINTS-true-RANDOM/_singles.txt")
 	if err != nil {
@@ -243,7 +246,10 @@ func readStats(fname string, statistics map[time.Time]stats) {
 	content = string(raw)
 	contents = strings.Split(content, "\t")
 	
-	resilience_random, _ := strconv.ParseFloat(contents[1], 32)
+	resilience_random, err := strconv.ParseFloat(contents[1], 32)
+	if err != nil {
+		log.Fatal(err)
+	}
 	
 	thisDegree := new(degree)
 	
@@ -275,7 +281,6 @@ func readStats(fname string, statistics map[time.Time]stats) {
 	timestamp, err := time.Parse("2006-01-02--15-04-05", fname[16:36])
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	
 	statistics[timestamp] = *thisStat

@@ -6,10 +6,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
-//	"time"
 )
-
-//type ID [32]byte
 
 type myNode struct {
 	Id          string          `json:"id"`
@@ -50,13 +47,12 @@ type node struct {
 //reads all files from ./snapshots/ and analyzes them
 //iterates over the files and looks for sybils and eclipse nodes
 //creates a map over the IDs (eclipse) and the IPs (sybils) and collects the nodes falling into this subspace
-//saves the maps containing the structs to s-TIMESTAMP_eclipse.json and s-TIMESTAMP_sybils.json
+//saves the maps containing the structs to ./nodeInfo/s-TIMESTAMP_eclipse.json and ./nodeInfo/s-TIMESTAMP_sybils.json
 func main() {
 	//get all files from the directory
 	files, err := ioutil.ReadDir("./snapshots")
 	if err != nil {
-		log.Print("err")
-		return
+		log.Fatal(err)
 	}
 	
 	//iterate over all files
@@ -111,7 +107,7 @@ func main() {
 			midIP, _ := strconv.Atoi(ip[2])
 			lastIP, _ := strconv.Atoi(ip[3])
 			
-			//if the IP prefix is not in the sybils map, initialize it
+			//if the IP prefix is not in the sybils map, initialize them
 			if _, ok := sybils[thisIP]; !ok {
 				sybils[thisIP] = new(sybil1)
 			}
