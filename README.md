@@ -47,6 +47,7 @@ The project is divided into multiple steps:
 * Enrich the snapshots with geo information
 * Create graphs readyble by GTNA
 * Further analysis of the snapshots
+* Better representation of the data
 
 ### 1. Gather snapshots
 
@@ -114,34 +115,182 @@ All the graphs within the four graph directories can be read by GTNA to analyze 
 
 ### 4. Further analysis
 
-The last two scripts analyze some further information from the snapshots.
+The next four scripts analyze some further information from the snapshots.
 
 ```
 go run 04analyzeSessions.go
 ```
 
-will create one file: **`/nodeInfo/sessionInfo.json`**. It contains the following information for every node:
+will create four files: **`/nodeInfo/sessionInfo.json`**, **`/nodeInfo/sessionInfoAverage.json`**, **`/nodeInfo/sessionInfoC.json`** and **`/nodeInfo/sessionInfoAS.json`**.
+The first contains the following information for every node:
 
 ```
-node {
-  sessionlength int
-  intersession  int
-  count         [2]int
-  reachable     map[string]bool
+stats {
+  sessionlength     int
+  intersession      int
+  sessioncount      int
+  intersessioncount int
+  count             [2]int
+  reachable         map[string]bool
 }
-``` 
+```
 
-The sessionlength is the avverage length of all seesion counted in "snapshots". So if you have four snapshots and the node in question was online in the first, third and fourth snapshot, the sessionlength would be 1.5 as it was online in three snapshots, but as it was offline in the mean time, this will be divided by the two session the node was online in. Same for the intersessions.
-Count ontains two ints: the first is the number of snapshots, this node was online at, the second is the number of snapshots, where the node was offline.
-Reachable is a map that holds if the node was online at s specific snapshot; the string is the timestamp of this snapshot.
+The sessionlength is the avverage length of all session counted in "snapshots". So if you have four snapshots and the node in question was online in the first, third and fourth snapshot, the sessionlength would be 1.5 as it was online in three snapshots, but as it was offline in the mean time, this will be divided by the two session the node was online in. Same for the intersessions. Sessioncount and intersessioncount are the number of sessions and intersessions respectively. Count contains two ints: the first is the number of snapshots, this node was online at, the second is the number of snapshots, where the node was offline. Reachable is a map that holds if the node was online at s specific snapshot; the string is the timestamp of this snapshot.
+The second file contains the absolut number of distinct nodes found, averages of the first four values from the file described above and a histogram of how often a session length and how often an intersession length occured:
+
+```
+statsAverages {
+  nodes                 int
+  avgsessionlength      float32
+  medsessionlength      float32
+  avgintersessionlength float32
+  medintersessionlength float32
+  sessions              map[int]int
+  intersessions         map[int]int
+}
+```
+
+The last two files contain the following stats for countries and ASes respectively.
+
+```
+stats {
+  sessionlength     int
+  intersession      int
+  sessioncount      int
+  intersessioncount int
+}
+```
+
 
 ```
 go run 05findMisbehavingNodes.go
 ```
 
-will create two files **`/nodeInfo/s-TIMESTAMP_eclipse.json`** and **`/nodeInfo/s-TIMESTAMP_sybils.json`**.
-The eclipse file contains nodes which have a common prefix of two bytes with at least one other node. This includes nodes with the entirely same ID. This file additionally contains the number of node per prefix and the geo information of these nodes.
-The sybil file contains nodes which share a specific subnet. The nodes are grouped by /16 subnets and further into /24 subnets. This file also contains the number of nodes both per /16 and /24 subnet and the geo information of these nodes.
+will create two files **`/nodeInfo/s-TIMESTAMP_eclipse.json`** and **`/nodeInfo/s-TIMESTAMP_sybils.json`** per snapshot. The eclipse file contains nodes which have a common prefix of two bytes with at least one other node. This includes nodes with the entirely same ID. This file additionally contains the number of node per prefix and the geo information of these nodes. The sybil file contains nodes which share a specific subnet. The nodes are grouped by /16 subnets and further into /24 subnets. This file also contains the number of nodes both per /16 and /24 subnet and the geo information of these nodes.
+
+### 5. Better representation of the data
+
+```
+go run 06calculateStatistics.go
+```
+
+will create the files **`/nodeInfo/statisticsA.json`** and **`/nodeInfo/statisticsO.json`**. Both hold information about the (total/in/out) degree of nodes and the resilience of the network.
+
+```
+Statistic {
+  Avg_nodes               float32
+  Avg_edges               float32
+  Min_resilience_targeted float32
+  Avg_resilience_targeted float32
+  Max_resilience_targeted float32
+  Min_resilience_random   float32
+  Avg_resilience_random   float32
+  Max_resilience_random   float32
+  Avg_degree_min          float32
+  Avg_degree_med          float32
+  Avg_degree_avg          float32
+  Avg_degree_max          float32
+  Avg_in_degree_min       float32
+  Avg_in_degree_med       float32
+  Avg_in_degree_avg       float32
+  Avg_in_degree_max       float32
+  Avg_out_degree_min      float32
+  Avg_out_degree_med      float32
+  Avg_out_degree_avg      float32
+  Avg_out_degree_max      float32
+  Stats                   map[time.Time]stats
+}
+```
+
+while stats looks like this:
+
+```
+stats {
+  Nodes               int
+  Edges               int
+  Resilience_targeted float32
+  Resilience_random   float32
+  Degree              degree
+}
+```
+
+and degree like this:
+
+```
+degree {
+  Degree_min     int
+  Degree_med     int
+  Degree_avg     float32
+  Degree_max     int
+  In_degree_min  int
+  In_degree_med  int
+  In_degree_avg  float32
+  In_degree_max  int
+  Out_degree_min int
+  Out_degree_med int
+  Out_degree_avg float32
+  Out_degree_max int
+}
+```
+
+
+```
+go run 07getMisbehavingNodeStatistics.go
+```
+
+gathers statistics about the misbehaving nodes collected with 05findMisbehavingnodes.go. It saves the minimum, median, average and max values for sybils on /16 subnet level, sybils on /24 subnet levels and eclipses, saves histograms for both sybil types and saves the biggest occurence found of all types.
+They look like this:
+
+```
+stats {
+  Sybil_count16 float32
+  Min_sybils16  int
+  Med_sybils16  int
+  Avg_sybils16  float32
+  Max_sybils16  int
+  Hist_sybils16 map[int]int
+  Sybil_count24 float32
+  Min_sybils24  int
+  Med_sybils24  int
+  Avg_sybils24  float32
+  Max_sybils24  int
+  Hist_sybils24 map[int]int
+  Eclipse_count float32
+  Min_eclipse   int
+  Med_eclipse   int
+  Avg_eclipse   float32
+  Max_eclipse   int
+  Huge_sybils16 map[string]*sybil1
+  Huge_sybils24 map[string]*sybil2
+  Huge_eclipse  map[string]*eclipse
+}
+```
+
+sybil1, sybil2 and eclipse look like these respectively:
+
+```
+eclipse {
+  Count int
+  Nodes map[string][]node
+}
+
+sybil1{
+  Count int
+  IP    map[int]*sybil2
+}
+
+sybil2{
+  Count int
+  Nodes map[int][]node
+}
+```
+
+```
+go run 08getASHistogramOverTime.go
+```
+
+creates a histogram of all AS and their corresponding number of nodes per snapshot. It saves this histogram in **`/nodeInfo/asTimeStats.txt`**.
+
 
 ## Performance
 
@@ -153,3 +302,9 @@ On my PC the go scripts performed with the following times:
 * 03: 2 seconds per snapshot
 * 04: 1 second per snapshot
 * 05: 1 second per snapshot
+* 06: 
+* 07: 
+* 08: 
+
+
+
