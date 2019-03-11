@@ -2,8 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
+	"sort"
+	"strconv"
 	"time"
 )
 
@@ -28,6 +32,16 @@ type Reachability struct {
 	Reachable     map[time.Time]string `json:"reachable"`
 }
 
+type statsAll struct {
+	Nodes            int                  `json:"nodes"`
+	AvgSessions      float32              `json:"avgsessionlength"`
+	MedSessions      int                  `json:"medsessionlength"`
+	AvgInterSessions float32              `json:"avgintersessionlength"`
+	MedInterSessions int                  `json:"medintersessionlength"`
+	Sessions         map[int]int          `json:"sessions"`
+	InterSessions    map[int]int          `json:"intersessions"`
+}
+
 type stats struct {
 	Nodes         int                  `json:"nodes"`
 	Sessions      float32              `json:"sessionlength"`
@@ -41,8 +55,9 @@ type stats struct {
 //iterates over the files and extracts when and how often a node was reachable
 //creates a struct Reachability for each node id containing the reachability (map), count of online/offline times and calculates the session and intersession lengths
 //saves the map containing the structs to ./nodeInfo/sessionInfo.json
-//calculates averages for all countries
-//saves the country stats in ./nodeInfo/sessionInfoCountries.json
+//calculates averages over all nodes, on country-level and on AS-level.
+//saves the averages to ./nodeInfo/sessionInfoAverage.json, ./nodeInfo/sessionInfoC.json and ./nodeInfo/sessionInfoAS.json respectively
+//country- and AS-level structs cann also be exported to .txt files, therefore just remove the last comments
 func main() {
 	//global nodes map, nodeID->node
 	var nodes = make(map[string]myNode)
@@ -149,7 +164,10 @@ func main() {
 		a[k] = *thisReach
 	}
 	
-	log.Print("Calculating session lengths."
+	log.Print("Calculating session lengths.")
+	
+	allSessions := []int{}
+	allInterSessions := []int{}
 
 	//iterate over all Reachabilities
 	for k, v := range a {
@@ -161,7 +179,7 @@ func main() {
 		interSessionCount := 0
 		var interSessions = []int{}
 
-		//lastEntry can hav thre different states: "true", "false" and ""
+		//lastEntry can have three different states: "true", "false" and ""
 		lastEntry := ""
 		
 		//iterate over all files
@@ -238,6 +256,13 @@ func main() {
 			Reachable: v.Reachable,
 		}
 		a[k] = *thisReach
+		
+		for _, s := range sessions {
+			allSessions = append(allSessions, s)
+		}
+		for _, i := range interSessions {
+			allInterSessions = append(allInterSessions, i)
+		}
 	}
 
 	ajson, err := json.MarshalIndent(a, "", "\t")
@@ -251,17 +276,68 @@ func main() {
 	
 	log.Print("Calculating averages.")
 	
+	sumSessions := 0
+	sumInterSessions := 0
+	medSessions := 0
+	medInterSessions := 0
+	var histSessions = make(map[int]int)
+	var histInterSessions = make(map[int]int)
+	
+	//sort the arrays
+	sort.Ints(allSessions)
+	sort.Ints(allInterSessions)
+	
+	//construct histograms
+	for _, s := range allSessions {
+		sumSessions += s
+		histSessions[s]++
+	}
+	for _, i := range allInterSessions {
+		sumInterSessions += i
+		histInterSessions[i]++
+	}
+	
+	//get the medians from the sorted arrays
+	medSessions = allSessions[len(allSessions)/2]
+	medInterSessions = allInterSessions[len(allInterSessions)/2]
+	
+	var sessionStats = new(statsAll)
+	
+	*sessionStats = statsAll {
+		Nodes: len(a),
+		AvgSessions: float32(float32(sumSessions)/float32(len(allSessions))),
+		MedSessions: medSessions,
+		AvgInterSessions: float32(float32(sumInterSessions)/float32(len(allInterSessions))),
+		MedInterSessions: medInterSessions,
+		Sessions: histSessions,
+		InterSessions: histInterSessions,
+	}
+	
+	sjson, err := json.MarshalIndent(sessionStats, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./nodeInfo/sessionInfoAverage.json", sjson, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	log.Print("Calculating averages for countries.")
+	
 	countryStats := make(map[string]stats)
 	
+	//iterate over all reachability entries
 	for id, reach := range a {
+		//initialize variables
 		country := nodes[id].Country
-		theseStats := new(stats)		
+		theseStats := new(stats)
 		nodes := 1
 		sessions := reach.Sessions
 		interSessions := reach.InterSessions
 		sCount := float32(reach.SCount)
 		iSCount := float32(reach.ISCount)
 		
+		//overwrite them in case the entry of this country already exists
 		if _, ok := countryStats[country]; ok {
 			*theseStats = countryStats[country]
 			nodes = theseStats.Nodes + 1
@@ -286,6 +362,7 @@ func main() {
 		theseStats := new(stats)
 		*theseStats = s
 		
+		//calculate averages
 		nodes := theseStats.Nodes
 		sessions := float32(theseStats.Sessions / float32(theseStats.Nodes))
 		interSessions := float32(theseStats.InterSessions / float32(theseStats.Nodes))
@@ -307,11 +384,106 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = ioutil.WriteFile("./nodeInfo/sessionInfoCountries.json", cjson, 0644)
+	err = ioutil.WriteFile("./nodeInfo/sessionInfoC.json", cjson, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	
+	log.Print("Calculating averages for ASes.")
+	
+	asStats := make(map[string]stats)
+	
+	//same as for the countries
+	for id, reach := range a {
+		as := nodes[id].ASO
+		theseStats := new(stats)		
+		node := 1
+		sessions := reach.Sessions
+		interSessions := reach.InterSessions
+		sCount := float32(reach.SCount)
+		iSCount := float32(reach.ISCount)
+		
+		if _, ok := asStats[as]; ok {
+			*theseStats = asStats[as]
+			node = theseStats.Nodes + 1
+			sessions = theseStats.Sessions + reach.Sessions
+			interSessions = theseStats.InterSessions + reach.InterSessions
+			sCount = theseStats.SCount + float32(reach.SCount)
+			iSCount = theseStats.ISCount + float32(reach.ISCount)
+		}
+		
+		*theseStats = stats {
+			Nodes: node,
+			Sessions: sessions,
+			InterSessions: interSessions,
+			SCount: sCount,
+			ISCount: iSCount,
+		}
+		
+		asStats[as] = *theseStats
+	}
+	
+	for as, s := range asStats {
+		theseStats := new(stats)
+		*theseStats = s
+		
+		node := theseStats.Nodes
+		sessions := float32(theseStats.Sessions / float32(theseStats.Nodes))
+		interSessions := float32(theseStats.InterSessions / float32(theseStats.Nodes))
+		sCount := float32(theseStats.SCount / float32(theseStats.Nodes))
+		iSCount := float32(theseStats.ISCount / float32(theseStats.Nodes))
+		
+		*theseStats = stats {
+			Nodes: node,
+			Sessions: sessions,
+			InterSessions: interSessions,
+			SCount: sCount,
+			ISCount: iSCount,
+		}
+		
+		asStats[as] = *theseStats
+	}
+	
+	asjson, err := json.MarshalIndent(asStats, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./nodeInfo/sessionInfoAS.json", asjson, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+//	writeToFile(countryStats, "./nodeInfo/sessionInfoC.txt")
+//	writeToFile(asStats, "./nodeInfo/sessionInfoAS.txt")
+	
 	log.Printf("Ende, len: %d", len(a))
 }
 
+func writeToFile(asStats map[string]stats, fname string) {
+	
+	f, err := os.Create(fname)
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	for as, s := range asStats {
+		nodes := strconv.Itoa(s.Nodes)
+		sessions := fmt.Sprintf("%f",s.Sessions)
+		intersessions := fmt.Sprintf("%f",s.InterSessions)
+		scount := fmt.Sprintf("%f",s.SCount)
+		iscount := fmt.Sprintf("%f",s.ISCount)
+		
+		f.Write([]byte(as + "$"))
+		f.Write([]byte(nodes + "$"))
+		f.Write([]byte(sessions + "$"))
+		f.Write([]byte(intersessions + "$"))
+		f.Write([]byte(scount + "$"))
+		f.Write([]byte(iscount))
+		f.Write([]byte("\n"))
+	}
+	
+	err = f.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
