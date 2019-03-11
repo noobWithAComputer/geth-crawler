@@ -5,10 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net"
-//	"os"
-//	"strconv"
-//	"sync"
-
+	
 	"github.com/oschwald/geoip2-golang"
 )
 
@@ -49,26 +46,23 @@ type Counts struct {
 //reads all files from ./snapshots and the GeoLite databases
 //iterates over all snapshots and collects geolocational data for each node
 //saves a map of the nodes with geo data to ./graphs/s-TIMESTAMP_geo.json
-//saves statistics about the distribution of countries and AS to ./graphs/s-TIMESTAMP_geo_counts.json
+//saves statistics about the distribution of countries and AS to ./nodeInfo/s-TIMESTAMP_geo_counts.json
 func main() {
 	//get all files from the directory
 	files, err := ioutil.ReadDir("./snapshots")
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	
 	//load the DBs
 	cityDB, err := geoip2.Open("./GeoLite/GeoLite2-City.mmdb")
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	
 	asnDB, err := geoip2.Open("./GeoLite/GeoLite2-ASN.mmdb")
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	
 	//iterate over all files
@@ -96,13 +90,11 @@ func readMaps(fname string, asnDB *geoip2.Reader, cityDB *geoip2.Reader) {
 	//read the given file into thisM
 	raw, err := ioutil.ReadFile("./snapshots/" + fname)
 	if err != nil {
-		log.Printf("Error opening file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	err = json.Unmarshal(raw, &thisM)
 	if err != nil {
-		log.Printf("Error unmarshalling file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	
 	//iterate over thisM (all nodes)
