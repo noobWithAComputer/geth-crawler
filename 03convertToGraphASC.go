@@ -6,10 +6,7 @@ import (
 	"log"
 	"os"
 	"strconv"
-//	"sync"
 )
-
-//type ID [32]byte
 
 type myNode struct {
 	Id          string          `json:"id"`
@@ -32,16 +29,15 @@ type node struct {
 
 
 //reads all files from ./geo
-//constructs multiple maps: nodes ([string][]int), nodesi ([int]string), edges ([string][]string) in two forms each: 1 (all nodes) and 2 (only online nodes)
-//puts together adjacency lists for both cases
-//saves the lists to "graphs/s-TIMESTAMP" and "graphs/s-TIMESTAMP_online"
-//can ignore specific countries or AS organizations (see comments in for loop in function readMaps)
+//constructs multiple maps: mc/mas (map[string][]string), nc/nas (map[int]string), nci/nasi (map[string]int), eci/easi (map[int][]int)
+//all maps containing a "c" are country related, all maps with "as" are AS related; m/n/i are pre/postfixes adopted from 02convertToGraph.go
+//puts together adjacency lists for countries and ASes
+//saves the lists to "graphs_asorgs/s-TIMESTAMP_asorgs" and "graphs_countries/s-TIMESTAMP_countries"
 func main() {
 	//get all files from the directory
 	files, err := ioutil.ReadDir("./geo")
 	if err != nil {
-		log.Print("Error reading directory.")
-		return
+		log.Fatal(err)
 	}
 	
 	//iterate over all files
@@ -61,33 +57,42 @@ func readMaps(fname string) {
 	var thisM = make(map[int]myNode)
 	//nodeID->int
 	var thisMi = make(map[string]int)
+	
 	//country->[]country
+	//represents countries and their connections to other countries
 	var mc = make(map[string][]string)
 	//countryID->country
+	//represents countryIDs and the countries, they are pointing to
 	var nc = make(map[int]string)
 	//country->countryID
+	//reverse of the above
 	var nci = make(map[string]int)
-	//AS->AS
+	
+	//AS->[]AS
+	//represents ASes and their connections to other ASes
 	var mas = make(map[string][]string)
 	//ASID->AS
+	//represenst ASIDs and the ASes, they are pointing to
 	var nas = make(map[int]string)
 	//AS->ASID
+	//reverse of the above
 	var nasi = make(map[string]int)
+	
 	//countryID->[]countryID
+	//connections from countryID to other countryIDs
 	var eci = make(map[int][]int)
 	//ASID->[]ASID
+	//connections from ASID to other ASIDs
 	var easi = make(map[int][]int)
 	
 	//read the given file into thisM
 	raw, err := ioutil.ReadFile("./geo/" + fname)
 	if err != nil {
-		log.Printf("Error opening file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	err = json.Unmarshal(raw, &thisM)
 	if err != nil {
-		log.Printf("Error unmarshalling file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	
 	//iterate over thisM (all nodes) and create its nodeID->int counterpart
@@ -168,8 +173,7 @@ func writeToFile(edges map[int][]int, fname string) {
 	log.Printf("Start writing to file %s", fname)
 	f, err := os.Create("./" + fname)
 	if err != nil {
-		log.Printf("Error creating file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	
 	//get the node and edge count of the graph
@@ -202,8 +206,7 @@ func writeToFile(edges map[int][]int, fname string) {
 	
 	err = f.Close()
 	if err != nil {
-		log.Printf("Error closing file %s", fname)
-		return
+		log.Fatal(err)
 	}
 }
 
