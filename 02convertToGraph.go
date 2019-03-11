@@ -6,10 +6,7 @@ import (
 	"log"
 	"os"
 	"strconv"
-//	"sync"
 )
-
-//type ID [32]byte
 
 type myNode struct {
 	Id          string          `json:"id"`
@@ -32,16 +29,15 @@ type node struct {
 
 
 //reads all files from ./geo
-//constructs multiple maps: nodes ([string][]int), nodesi ([int]string), edges ([string][]string) in two forms each: 1 (all nodes) and 2 (only online nodes)
+//constructs multiple maps: nodes (map[string][]int), nodesi (map[int]string), edges (map[string][]string) in two forms each: 1 (all nodes) and 2 (only online nodes)
 //puts together adjacency lists for both cases
-//saves the lists to "graphs/s-TIMESTAMP" and "graphs/s-TIMESTAMP_online"
+//saves the lists to "graphs/s-TIMESTAMP" and "graphs_online/s-TIMESTAMP_online"
 //can ignore specific countries or AS organizations (see comments in for loop in function readMaps)
 func main() {
 	//get all files from the directory
 	files, err := ioutil.ReadDir("./geo")
 	if err != nil {
-		log.Print("Error reading directory.")
-		return
+		log.Fatal(err)
 	}
 	
 	//iterate over all files
@@ -59,29 +55,36 @@ func readMaps(fname string) {
 	log.Printf("Start reading from file %s", fname)
 	//int->node
 	var thisM = make(map[int]myNode)
+	
 	//nodeID->[]int
+	//nodeID pointing to the corresponding int representation (all nodes)
 	var nodes1 = make(map[string]int)
 	//int->nodeID
+	//reverse of the above
 	var nodesi1 = make(map[int]string)
+	
 	//nodeID->[]int
+	//nodeID pointing to the corresponding int representation (online nodes)
 	var nodes2 = make(map[string]int)
 	//int->nodeID
+	//reverse of the above
 	var nodesi2 = make(map[int]string)
+	
 	//nodeID->[]nodeID
+	//connections from nodeID to other nodeIDs (all nodes)
 	var edges1 = make(map[string][]string)
 	//nodeID->[]nodeID
+	//connections from nodeID to other nodeIDs (online nodes)
 	var edges2 = make(map[string][]string)
 	
 	//read the given file into thisM
 	raw, err := ioutil.ReadFile("./geo/" + fname)
 	if err != nil {
-		log.Printf("Error opening file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	err = json.Unmarshal(raw, &thisM)
 	if err != nil {
-		log.Printf("Error unmarshalling file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	
 	//node counter all nodes
@@ -156,8 +159,7 @@ func writeToFile(nodes map[string]int, nodesi map[int]string, edges map[string][
 	log.Printf("Start writing to file %s", fname)
 	f, err := os.Create("./" + fname)
 	if err != nil {
-		log.Printf("Error creating file %s", fname)
-		return
+		log.Fatal(err)
 	}
 	
 	//get the node and edge count of the graph
@@ -197,8 +199,7 @@ func writeToFile(nodes map[string]int, nodesi map[int]string, edges map[string][
 	
 	err = f.Close()
 	if err != nil {
-		log.Printf("Error closing file %s", fname)
-		return
+		log.Fatal(err)
 	}
 }
 
