@@ -1,0 +1,22 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background and Related Work}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Background}{section.2}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Blockchain}{subsection.2.1}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.2}{P2P Networks}{subsection.2.1}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Related Work}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Methodology}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Crawler}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Analysis}{section.3}% 9
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Distribution over Autonomous Systems}{subsection.3.2}% 10
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Degree distribution}{subsection.3.2}% 11
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Resilience of the network}{subsection.3.2}% 12
+\BOOKMARK [3][-]{subsubsection.3.2.4}{Session and intersession length}{subsection.3.2}% 13
+\BOOKMARK [3][-]{subsubsection.3.2.5}{Existence of misbehaving nodes}{subsection.3.2}% 14
+\BOOKMARK [1][-]{section.4}{Results}{}% 15
+\BOOKMARK [2][-]{subsubsection.4.0.1}{Distribution over Autonomous Systems}{section.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.0.2}{Degree distribution}{subsubsection.4.0.1}% 17
+\BOOKMARK [3][-]{subsubsection.4.0.3}{Resilience of the network}{subsubsection.4.0.1}% 18
+\BOOKMARK [3][-]{subsubsection.4.0.4}{Session and inter session length}{subsubsection.4.0.1}% 19
+\BOOKMARK [3][-]{subsubsection.4.0.5}{Existence of misbehaving nodes}{subsubsection.4.0.1}% 20
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 21
+\BOOKMARK [1][-]{section*.1}{References}{}% 22
