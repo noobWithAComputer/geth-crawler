@@ -302,9 +302,9 @@ On my PC the go scripts performed with the following times:
 * 03: 2 seconds per snapshot
 * 04: 1 second per snapshot
 * 05: 1 second per snapshot
-* 06: 
-* 07: 
-* 08: 
+* 06: 30 milliseconds per snapshot
+* 07: 30 milliseconds per snapshot
+* 08: 40 milliseconds per snapshot
 
 
 
