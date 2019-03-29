@@ -161,6 +161,8 @@ stats {
 }
 ```
 
+WARNING: 04analyzeSessions.go needs a LOT of RAM. On my machine (16GB) analyzing 5 weeks of snapshots (=840 snapshots, when creating one snapshot every hour) was possible, but 6 weeks (1008 snapshots) was causing "out of memory"-errors!
+
 
 ```
 go run 05findMisbehavingNodes.go
