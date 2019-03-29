@@ -2,12 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"sort"
-	"strconv"
 	"time"
 )
 
@@ -33,21 +31,21 @@ type Reachability struct {
 }
 
 type statsAll struct {
-	Nodes            int                  `json:"nodes"`
-	AvgSessions      float32              `json:"avgsessionlength"`
-	MedSessions      int                  `json:"medsessionlength"`
-	AvgInterSessions float32              `json:"avgintersessionlength"`
-	MedInterSessions int                  `json:"medintersessionlength"`
-	Sessions         map[int]int          `json:"sessions"`
-	InterSessions    map[int]int          `json:"intersessions"`
+	Nodes            int         `json:"nodes"`
+	AvgSessions      float32     `json:"avgsessionlength"`
+	MedSessions      int         `json:"medsessionlength"`
+	AvgInterSessions float32     `json:"avgintersessionlength"`
+	MedInterSessions int         `json:"medintersessionlength"`
+	Sessions         map[int]int `json:"sessions"`
+	InterSessions    map[int]int `json:"intersessions"`
 }
 
 type stats struct {
-	Nodes         int                  `json:"nodes"`
-	Sessions      float32              `json:"sessionlength"`
-	InterSessions float32              `json:"intersessionlength"`
-	SCount        float32              `json:"sessioncount"`
-	ISCount       float32              `json:"intersessioncount"`
+	Nodes         int     `json:"nodes"`
+	Sessions      float32 `json:"sessionlength"`
+	InterSessions float32 `json:"intersessionlength"`
+	SCount        float32 `json:"sessioncount"`
+	ISCount       float32 `json:"intersessioncount"`
 }
 
 
@@ -123,6 +121,8 @@ func main() {
 			a[v.Id] = *thisReach
 		}
 	}
+	
+	log.Print("Looping over reachability map.")
 	
 	//iterate over all Reachabilities
 	for k, v := range a {
@@ -264,6 +264,8 @@ func main() {
 			allInterSessions = append(allInterSessions, i)
 		}
 	}
+	
+	files = []os.FileInfo{}
 
 	ajson, err := json.MarshalIndent(a, "", "\t")
 	if err != nil {
@@ -312,7 +314,6 @@ func main() {
 		Sessions: histSessions,
 		InterSessions: histInterSessions,
 	}
-	
 	sjson, err := json.MarshalIndent(sessionStats, "", "\t")
 	if err != nil {
 		log.Fatal(err)
@@ -321,6 +322,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	
+	histSessions = make(map[int]int)
+	histInterSessions = make(map[int]int)
 	
 	log.Print("Calculating averages for countries.")
 	
@@ -331,7 +335,7 @@ func main() {
 		//initialize variables
 		country := nodes[id].Country
 		theseStats := new(stats)
-		nodes := 1
+		node := 1
 		sessions := reach.Sessions
 		interSessions := reach.InterSessions
 		sCount := float32(reach.SCount)
@@ -340,7 +344,7 @@ func main() {
 		//overwrite them in case the entry of this country already exists
 		if _, ok := countryStats[country]; ok {
 			*theseStats = countryStats[country]
-			nodes = theseStats.Nodes + 1
+			node = theseStats.Nodes + 1
 			sessions = theseStats.Sessions + reach.Sessions
 			interSessions = theseStats.InterSessions + reach.InterSessions
 			sCount = theseStats.SCount + float32(reach.SCount)
@@ -348,7 +352,7 @@ func main() {
 		}
 		
 		*theseStats = stats {
-			Nodes: nodes,
+			Nodes: node,
 			Sessions: sessions,
 			InterSessions: interSessions,
 			SCount: sCount,
@@ -363,14 +367,14 @@ func main() {
 		*theseStats = s
 		
 		//calculate averages
-		nodes := theseStats.Nodes
+		node := theseStats.Nodes
 		sessions := float32(theseStats.Sessions / float32(theseStats.Nodes))
 		interSessions := float32(theseStats.InterSessions / float32(theseStats.Nodes))
 		sCount := float32(theseStats.SCount / float32(theseStats.Nodes))
 		iSCount := float32(theseStats.ISCount / float32(theseStats.Nodes))
 		
 		*theseStats = stats {
-			Nodes: nodes,
+			Nodes: node,
 			Sessions: sessions,
 			InterSessions: interSessions,
 			SCount: sCount,
@@ -388,6 +392,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	
+	countryStats = make(map[string]stats)
 	
 	log.Print("Calculating averages for ASes.")
 	
@@ -423,6 +429,10 @@ func main() {
 		asStats[as] = *theseStats
 	}
 	
+	nodes = make(map[string]myNode)
+	
+	a = make(map[string]Reachability)
+	
 	for as, s := range asStats {
 		theseStats := new(stats)
 		*theseStats = s
@@ -453,37 +463,5 @@ func main() {
 		log.Fatal(err)
 	}
 	
-//	writeToFile(countryStats, "./nodeInfo/sessionInfoC.txt")
-//	writeToFile(asStats, "./nodeInfo/sessionInfoAS.txt")
-	
 	log.Printf("Ende, len: %d", len(a))
-}
-
-func writeToFile(asStats map[string]stats, fname string) {
-	
-	f, err := os.Create(fname)
-	if err != nil {
-		log.Fatal(err)
-	}
-	
-	for as, s := range asStats {
-		nodes := strconv.Itoa(s.Nodes)
-		sessions := fmt.Sprintf("%f",s.Sessions)
-		intersessions := fmt.Sprintf("%f",s.InterSessions)
-		scount := fmt.Sprintf("%f",s.SCount)
-		iscount := fmt.Sprintf("%f",s.ISCount)
-		
-		f.Write([]byte(as + "$"))
-		f.Write([]byte(nodes + "$"))
-		f.Write([]byte(sessions + "$"))
-		f.Write([]byte(intersessions + "$"))
-		f.Write([]byte(scount + "$"))
-		f.Write([]byte(iscount))
-		f.Write([]byte("\n"))
-	}
-	
-	err = f.Close()
-	if err != nil {
-		log.Fatal(err)
-	}
 }
